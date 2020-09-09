@@ -55,10 +55,11 @@ void list_solver(listnode * H, int m, int k){
 		leaver = H->next;
 		H->next = leaver->next;
 
-		printf("%d\n", leaver->data);
+		printf("%d, next: %d, next->next: %d\n", leaver->data, leaver->next->data,leaver->next->next->data);
 		free(leaver);
 		leaver = NULL;
 	}
+
 	printf("---%d---\n", H->data);
 	printf("---%d---\n", H->next->data);
 	// list_show(H);
