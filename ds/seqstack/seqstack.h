@@ -18,6 +18,7 @@ int is_stack_full(sqstack* s);
 int stack_clear(sqstack* s);
 int stack_push(sqstack* s, datatype value);
 void stack_free(sqstack);
+datatype stack_pop(sqstack * s);
 
 
 
