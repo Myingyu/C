@@ -22,26 +22,28 @@ int is_stack_empty(sqstack * s){
 }
 
 int is_stack_full(sqstack* s){
-	s->top == s->maxlen-1 ? 1:0;
+	return(s->top == s->maxlen-1 ? 1:0);
+
 }
-int stack_clear(sqstack* s){
+void stack_clear(sqstack* s){
 	s->top = -1;
 }
 int stack_push(sqstack* s, datatype value){
-	if ( is_stack_full ){
+	if ( is_stack_full(s) ){
 		printf("stack is full\n");
 		return -1;
 	}
 	s->data[s->top+1] = value;
 	s->top++;  
+	return 0;
 }
 
 datatype stack_pop(sqstack * s){
 	s->top--;
-	return s->datatype[top+1];
+	return s->data[s->top+1];
 }
 
-void stack_free(sqstack){
+void stack_free(sqstack* s){
 	free(s->data);
 	s->data = NULL;
 	free(s);

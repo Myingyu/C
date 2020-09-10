@@ -15,9 +15,9 @@ typedef struct {
 sqstack* create_list(int len);
 int is_stack_empty(sqstack * s);
 int is_stack_full(sqstack* s);
-int stack_clear(sqstack* s);
+void stack_clear(sqstack* s);
 int stack_push(sqstack* s, datatype value);
-void stack_free(sqstack);
+void stack_free(sqstack* s);
 datatype stack_pop(sqstack * s);
 
 
