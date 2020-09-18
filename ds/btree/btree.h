@@ -14,9 +14,12 @@ typedef struct btreenode{
 }btree_node, *btree_pnode;
 
 void pre_order(btree_node* t);
+void mid_order(btree_node* t);
+void post_order(btree_node* t);
 
 btree_pnode create_list(void);
 void create_in_list(btree_node ** T);
+void level_order(btree_node* t);
 
 #endif
 

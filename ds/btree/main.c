@@ -10,8 +10,15 @@ int main(int argc, char const *argv[])
 	printf("先序遍历\n");
 	pre_order(t);
 	printf("\n");
-
+	printf("中序遍历\n");
+	pre_order(t);
+	printf("\n");
+	printf("后序遍历\n");
+	pre_order(t);
+	printf("\n");
+	level_order(btree_node* t);
+	
 
 
 	return 0;
-}
+} 

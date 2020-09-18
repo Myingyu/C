@@ -1,4 +1,5 @@
 #include "btree.h"
+#include "linkqueue.h"
 
 btree_pnode create_list(void){
 	btree_node * new;
@@ -47,6 +48,64 @@ void pre_order(btree_node* t){
 		pre_order(t->rchild);
 	}
 }
+
+void mid_order(btree_node* t){
+	if (t != NULL){
+		//先序遍历左子树
+		pre_order(t->lchild);
+		//访问根节点
+		printf("%c", t->data);
+		//先序遍历右子树
+		pre_order(t->rchild);
+	}
+}
+
+void post_order(btree_node* t){
+	if (t != NULL){
+		//先序遍历左子树
+		pre_order(t->lchild);
+		//先序遍历右子树
+		pre_order(t->rchild);
+		//访问根节点
+		printf("%c", t->data);
+	}
+}
+
+void level_order(btree_node* t){
+	linkqueue* q;
+	q = create_list();
+	while( t != NULL){
+		printf("%c\n", t->data);
+		//当T的指针不为空，则入队
+		if ( t->lchild != NULL ){
+			insert_list(t->lchild, q);
+		}
+		if (t->rchild != NULL ){
+			insert_list(t->rchild, q);
+		}
+		if ( !is_empty_list(q)){
+			out_list(q,&t)
+		}
+		else{
+			break; 
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
