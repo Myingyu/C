@@ -71,11 +71,12 @@ void post_order(btree_node* t){
 	}
 }
 
-void level_order(btree_node* t){
+void level_order(btree_node * t){
 	linkqueue* q;
-	q = create_list();
+	q = create_queue();
+	printf("层次排序：");
 	while( t != NULL){
-		printf("%c\n", t->data);
+		printf("%c", t->data);
 		//当T的指针不为空，则入队
 		if ( t->lchild != NULL ){
 			insert_list(t->lchild, q);
@@ -84,12 +85,13 @@ void level_order(btree_node* t){
 			insert_list(t->rchild, q);
 		}
 		if ( !is_empty_list(q)){
-			out_list(q,&t)
+			out_list(q, &t);
 		}
 		else{
 			break; 
 		}
 	}
+	printf("\n");
 
 }
 

@@ -1,5 +1,5 @@
 #include "linkqueue.h"
-linkqueue* create_list(void){
+linkqueue* create_queue(void){
 	linkqueue * q;
 	linknode * p;
 	if ( (q = (linkqueue*)malloc(sizeof(linkqueue))) == NULL){
@@ -51,7 +51,7 @@ void show_list(linkqueue* q){
 	linknode* p;
 	p = q->front;
 	while(p->next){
-		printf("%d\n", p->next->data);
+		printf("%c\n", p->next->data->data);
 		p = p->next;
 	}
 
