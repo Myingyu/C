@@ -26,7 +26,7 @@ int insert_list(datatype value, linkqueue* q){
 	p->data = value;
 	p->next = NULL;
 	q->rear->next = p;
-	q->rear = q->rear->next;
+	q->rear = p;
 
 	return 1;
 }
@@ -49,12 +49,16 @@ int out_list(linkqueue* q, datatype* D){
 
 void show_list(linkqueue* q){
 	linknode* p;
+	if (is_empty_list(q)){
+		printf("empty list\n");
+		return ;
+	}	
 	p = q->front;
 	while(p->next){
-		printf("%c\n", p->next->data->data);
+		printf("%c", p->next->data->data);
 		p = p->next;
 	}
-
+	printf("\n");
 }
 
 
