@@ -4,16 +4,25 @@
 #include <stdlib.h>
 #include "btree.h"
 
-typedef char datatype_ls
+typedef char datatype_ls;
 
-typedef struct linkstack{
+typedef struct linknode{
 	datatype_ls data;
-	struct linkstackt next;
+	struct linknode *next;
+}stack_node;
+
+typedef struct linkstack
+{
+	stack_node *top;
+	stack_node *bottom;
+	int height;
+	
 }link_stack;
 
-void init_linkstack(link_stack* Top);
-int push_linkstack(datatype_ls value, link_stack Top);
-int is_stack_empty(sqstack *Top);
-sqstack* del_stack(sqstack * Top);
-void show_stack(sqstack *Top);
+
+link_stack* InitStack(void);
+void LinkstackPop(link_stack* pStack, datatype_ls *D); //出栈
+void LinkstackPush(datatype_ls value, link_stack* pStack);
+int IsStackEmpty(link_stack * pStack);
+void DisplayStack(link_stack* pStack);
 #endif

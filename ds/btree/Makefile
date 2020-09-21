@@ -1,6 +1,8 @@
 CC = gcc
 CFLAGS = -Wall 
-main: main.c btree.c linkqueue.c
+# main: main.c btree.c linkqueue.c
+# 	$(CC) $(CFLAGS) $^ -o $@
+linkstackmain: linkstackmain.c linkstack.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 .PHONY: clean
