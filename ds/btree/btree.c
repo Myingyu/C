@@ -1,5 +1,6 @@
 #include "btree.h"
 #include "linkqueue.h"
+#include "linkstack.h"
 
 btree_pnode create_list(void){
 	btree_node * new;
@@ -75,50 +76,96 @@ void level_order(btree_node * t){
 	linkqueue* q;
 	q = create_queue();
 	printf("层次排序：");
-	while( t != NULL){
+	// insert_list(t, q);
+	// printf("%c", t->data);
+	while( t!= NULL ){
+		// out_list(q, &t);
 		printf("%c", t->data);
 		//当T的指针不为空，则入队
-
 		if ( t->lchild != NULL ){
 			if(!insert_list(t->lchild, q)){
 				printf("insert_list failed\n");
 			}
+			// printf("lchild:%c\n", t->lchild->data);
 			// show_list(q);
 		}
+
 		if (t->rchild != NULL ){
 			// printf("rchild: %c\n", t->rchild->data);
 			if(!insert_list(t->rchild, q)){
 				printf("insert_list failed\n");
 			}
-			// show_list(q);
+		}
 
-		}
 		// printf("%c\n", q->front->next->data->data);
-		if ( !is_empty_list(q) ){
+
 			// show_list(q);
-			out_list(q, &t);
-	
-		}else{
-			// printf("%c%c\n",t->lchild->data, t->rchild->data);
-			// out_list(q, &t);
-			// printf("else: q\n");
-			// show_list(q);
-			// printf("else: %c, %c, %c \n", t->data, t->lchild->data, t->rchild->data);
-			// // printf("q: %c\n",q->front->next->data->data);
-			break; 
+		if (is_empty_list(q)){
+			break;
 		}
+			out_list(q, &t);
+			// printf("%c", t->data);
+
+	};
+	if ( t->lchild){
+		printf("%c", t->lchild->data);
 	}
+	if (t->rchild){
+		printf("%c", t->rchild->data);
+	}
+	
+	
+	
 	printf("\n");
 
 }
+//先序非递归算法
+void stack_pre_order(btree_node* t){
+	link_stack *q;
+	q = InitStack();
+	while( t != NULL || !IsStackEmpty(q)){
+		if (t != NULL){
+			printf("%c", t->data);
+			if (t->rchild != NULL){
+				LinkstackPush(t->rchild, q);
+			}
+			t = t->lchild;
+		}else{
+			LinkstackPop(q,&t);
+		}
+	}
 
 
+	printf("\n");
+	return;
+}
+void stack_mid_order(btree_node* t){
+	link_stack *q;
+	q = InitStack();
 
+	while( t != NULL || !IsStackEmpty(q)){
+		while(t!= NULL){
+			LinkstackPush(t, q);
+			t = t->lchild;
+		}
+		if ( !IsStackEmpty(q)){
+			LinkstackPop(q, &t);
+			printf("%c", t->data);
+			t = t->rchild;
+		}
+	}
+	printf("\n");
+	return;
 
+}
 
+void stack_post_order(btree_node* t){
+	link_stack *q, *s;
+	q = s = InitStack();
+	while( t != NULL || !IsStackEmpty(q)){
 
-
-
+	}
+}
 
 
 

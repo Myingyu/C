@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "btree.h"
 
-typedef char datatype_ls;
+typedef btree_node* datatype_ls;
 
 typedef struct linknode{
 	datatype_ls data;

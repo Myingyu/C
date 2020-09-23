@@ -9,11 +9,13 @@ int main(int argc, char const *argv[])
 	pStack = InitStack();
 	LinkstackPush('1', pStack);
 	LinkstackPush('2',pStack);
-	// LinkstackPush('c',pStack);
+	LinkstackPush('c',pStack);
 	// DisplayStack(pStack);
 
 	LinkstackPop(pStack, &D);
-
+	printf("%c\n", D);
+	LinkstackPop(pStack, &D);
+	printf("%c\n", D);
 	LinkstackPop(pStack, &D);
 	// printf("%c\n", D);
 	// LinkstackPop(pStack, &D);

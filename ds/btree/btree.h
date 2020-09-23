@@ -20,7 +20,10 @@ void post_order(btree_node* t);
 btree_pnode create_list(void);
 void create_in_list(btree_node ** T);
 void level_order(btree_node* t);
-
+void stack_pre_order(btree_node*);
+void stack_mid_order(btree_node* t);
+void stack_post_order(btree_node* t);
+void stack_post_order(btree_node* t);
 #endif
 
 

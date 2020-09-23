@@ -22,7 +22,7 @@ void LinkstackPop(link_stack* pStack, datatype_ls *D){
 	 	free(pStack->top);
 	 	pStack->top = pStack->bottom = NULL;
 	 	pStack->height--;
-	 	printf("最后一个元素出栈: %c\n", *D);
+	 	// printf("最后一个元素出栈: %c\n", *D);
 	 	return;	
 	 }
 	 *D = pStack->top->data;
@@ -30,7 +30,7 @@ void LinkstackPop(link_stack* pStack, datatype_ls *D){
 	 free(pStack->top);
 	 pStack->top = Second;
 	 pStack->height--;
-	 printf("正常出栈: %c\n",*D);
+	 // printf("正常出栈: %c\n",*D);
 	 return;
 }
 
@@ -64,7 +64,7 @@ void DisplayStack(link_stack* pStack){
 		return;
 	}
 	while(pStack->top != NULL){
-		printf("%c", pStack->top->data);
+		printf("%c", pStack->top->data->data);
 		pStack->top = pStack->top->next;
 	}
 	printf("\n");

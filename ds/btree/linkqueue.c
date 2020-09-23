@@ -35,7 +35,8 @@ int is_empty_list(linkqueue *q){
 }
 int out_list(linkqueue* q, datatype* D){
 	if (is_empty_list(q)){
-		printf("empty list\n");
+		// free(D);
+		// *D = NULL;
 		return 0;
 	}
 	linknode* 	leaver;
