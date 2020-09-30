@@ -42,8 +42,9 @@ void LinkstackPush(datatype_ls value, link_stack* pStack){
 		return;
 	}
 	temp->next = pStack->top;
+	temp->data = value;
 	pStack->top = temp;
-	pStack->top->data = value;
+	// pStack->top->data = value;
 	pStack->height++;
 	return;
 
