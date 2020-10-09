@@ -3,18 +3,26 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-
-int status;
-pid_t pid;
-if ( pid = fork()){
-	perror("fork");
-	exit(-1);
-}else if ( pid == 0)
+int main(int argc, char const *argv[])
 {
-	sleep(1);
-	exit(2);
+	int status;
+	pid_t pid;
+	if ( (pid = fork() ) < 0){
+		perror("fork");
+		exit(-1);
+	}
+	else if ( pid == 0)
+	{
+		sleep(1);
+		exit(2);
+	}
+	else{
+		wait(&status);
+		printf("%x\n", status);
+	}
+	
+	return 0;
 }
-else{
-	wait(&status);
-	printf("%x\n", status);
-}
+
+
+
