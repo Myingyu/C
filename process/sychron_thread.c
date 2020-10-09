@@ -13,6 +13,7 @@ void *function(void *arg);
 int main(int argc, char const *argv[])
 {
 	pthread_t a_thread;
+	//MAC OS 不支持 sem_init, sem_init只能在Linux下运行
 	if ( sem_init(&sem, 0, 0) < 0)
 	{
 		perror("sem_init");
