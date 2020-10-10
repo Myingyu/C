@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
 		value1 = count;
 		value2 = count;
 		#ifdef _LOCK_
-		pthread_mutex_unnlock(&lock);
+		pthread_mutex_unlock(&lock);
 		#endif
 	}
 	return 0;
