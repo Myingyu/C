@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
 	}else{
 		//父进程
 		wait(&status);
-		printf("status%x\n", status);
+		printf("status: %x\n", status);
 	}
 	return 0;
 }
