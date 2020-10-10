@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <string.h>
+#include <wait.h>
 
 int main(void)
 {
