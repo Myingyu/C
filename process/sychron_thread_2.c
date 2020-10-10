@@ -41,8 +41,8 @@ int main(int argc, char const *argv[])
 
 void *function(void * arg){
 	while( 1 ){
-		sem_wait(&sem_w);
-		sem_post(&sem_r);
+		sem_post(&sem_w);
+		sem_wait(&sem_r);
 		printf("your enter %lu characters\n", strlen(buf) );
 
 	}
