@@ -30,9 +30,9 @@ int main(int argc, char const *argv[])
 		perror("pthread_create failed!");
 	}
 	do{
-		sem_wait(&sem_r);
+		sem_wait(&sem_w);
 		fgets(buf, 32, stdin);
-		sem_post(&sem_w);
+		sem_post(&sem_r);
 		sleep(1);
 	}while(strncmp(buf, "quit", 4) != 0);
 
