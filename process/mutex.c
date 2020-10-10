@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
 		perror("mute init failed!");
 		exit(-1);
 	}
-	if ( pthread_creat(&a_thread, NULL, function, NULL) != 0 )
+	if ( pthread_create(&a_thread, NULL, function, NULL) != 0 )
 	{
 		printf("failed to pthread_creat!\n");
 		exit(-1);
