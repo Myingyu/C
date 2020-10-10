@@ -9,14 +9,16 @@
 int main(void)
 {
 	pid_t pid;
-	int pfd[2] , status;
+	int pfd[2], status;
 	char buf[32];
 	if ( pipe(pfd) < 0 )
 	{
 		perror("pipe failed!");exit(-1);
 	}
 	close(pfd[0]); //关闭读端
-	if ( pid == fork() < 0)
+
+
+	if ( (pid = fork()) < 0)
 	{
 		perror("fork failed"); exit(-1);
 	}else if ( pid == 0)
