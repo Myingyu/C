@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 	int pfd;
 
 
-	if ((pfd=open("myfifo", O_RDONLY) < 0 ))
+	if ( (pfd = open("myfifo", O_RDONLY)) < 0 )
 	{
 		perror("open failed!");
 		exit(-1);
