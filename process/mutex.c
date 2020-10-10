@@ -36,6 +36,7 @@ int main(int argc, char const *argv[])
 		value2 = count;
 		#ifdef _LOCK_
 		pthread_mutex_unlock(&lock);
+		sleep(1);
 		#endif
 	}
 	return 0;
