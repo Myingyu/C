@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
 		value2 = count;
 		#ifdef _LOCK_
 		pthread_mutex_unlock(&lock);
-		sleep(1);
+		sleep(2);
 		#endif
 	}
 	return 0;
@@ -49,7 +49,7 @@ void *function(void *arg){
 		pthread_mutex_lock(&lock);
 		#endif
 
-		printf("value1 = %u, value2 =%u\n",value1,value2 );
+		printf("value1 = %u, value2 = %u\n",value1,value2 );
 
 		#ifdef _LOCK_
 		pthread_mutex_unlock(&lock);
