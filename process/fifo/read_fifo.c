@@ -25,6 +25,7 @@ int main(int argc, char const *argv[])
 	while( read(pfd, buf, N) > 0 ){
 		printf("the length of string is %lu\n", strlen(buf));
 	}
+	printf("read fifo exit!\n");
 
 	close(pfd);
 	return 0;
