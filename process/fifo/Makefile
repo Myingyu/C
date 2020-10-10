@@ -10,4 +10,4 @@ write_fifo: write_fifo.c
 
 .PHONY:clean
 clean:
-	rm -rf *.o
+	lsrm -rf *.o
