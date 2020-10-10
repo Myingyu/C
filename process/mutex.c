@@ -46,11 +46,9 @@ void *function(void *arg){
 		#ifdef _LOCK_
 		pthread_mutex_lock(&lock);
 		#endif
-		if (value1 != value2)
-		{
-			printf("value1 = %u, value2 =%u\n",value1,value2 );
-			sleep(3);
-		}
+
+		printf("value1 = %u, value2 =%u\n",value1,value2 );
+		sleep(3);
 		#ifdef _LOCK_
 		pthread_mutex_unlock(&lock);
 		#endif
