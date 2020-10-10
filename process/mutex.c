@@ -4,6 +4,8 @@
 #include <string.h>
 #include <pthread.h>
 #include <unistd.h>
+// 不带锁：编译 gcc -o mutex mutex.c -lpthread
+// 带锁：编译 gcc -o mutex mutex.c -lpthread -D_LOCK_
 
 
 unsigned int value1, value2, count;
