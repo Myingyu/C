@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 		perror("write: sem_init failed");
 		exit(-1);
 	}
-	if ( phtread_create(&a_thread, NULL , function, NULL) != 0)
+	if ( pthread_create(&a_thread, NULL , function, NULL) != 0)
 	{
 		perror("pthread_create failed!");
 	}
