@@ -48,10 +48,11 @@ void *function(void *arg){
 		#endif
 
 		printf("value1 = %u, value2 =%u\n",value1,value2 );
-		sleep(3);
+
 		#ifdef _LOCK_
 		pthread_mutex_unlock(&lock);
 		#endif
+		sleep(3);
 	}
 	return NULL;
 }
