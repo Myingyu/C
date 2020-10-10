@@ -30,12 +30,12 @@ int main(int argc, char const *argv[])
 	while(1){
 		count++;
 		#ifdef _LOCK_
-		pthread_muex_lock(&lock);
+		pthread_mutex_lock(&lock);
 		#endif
 		value1 = count;
 		value2 = count;
 		#ifdef _LOCK_
-		pthread_muex_unnlock(&lock);
+		pthread_mutex_unnlock(&lock);
 		#endif
 	}
 	return 0;
@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 void *function(void *arg){
 	while(1){
 		#ifdef _LOCK_
-		pthread_muex_lock(&lock);
+		pthread_mutex_lock(&lock);
 		#endif
 		if (value1 != value2)
 		{
@@ -52,7 +52,7 @@ void *function(void *arg){
 			sleep(3);
 		}
 		#ifdef _LOCK_
-		pthread_muex_unnlock(&lock);
+		pthread_mutex_unnlock(&lock);
 		#endif
 	}
 	return NULL;
