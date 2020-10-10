@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 	{
 		perror("pipe failed!");exit(-1);
 	}
-	close (pfd[0]); //关闭读端
+	close(pfd[0]); //关闭读端
 	if ( pid == fork() < 0)
 	{
 		perror("fork failed"); exit(-1);
