@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 		sem_wait(&sem_r);
 		fgets(buf, 32, stdin);
 		sem_post(&sem_w);
-		sleep(5);
+		sleep(1);
 	}while(strncmp(buf, "quit", 4) != 0);
 
 	return 0;
