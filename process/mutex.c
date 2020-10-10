@@ -59,6 +59,22 @@ void *function(void *arg){
 	return NULL;
 }
 
+/*
+主线程 sleep(2)
+副线程 sleep(2)
+value1 = 1, value2 = 1
+value1 = 2, value2 = 2
+value1 = 2, value2 = 2
+value1 = 4, value2 = 4
+value1 = 5, value2 = 5
+value1 = 5, value2 = 5
+value1 = 7, value2 = 7
+value1 = 8, value2 = 8
+
+
+*/
+
+
 
 
 
