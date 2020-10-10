@@ -49,7 +49,7 @@ void *function(void *arg){
 		if (value1 != value2)
 		{
 			printf("value1 = %u, value2 =%u\n",value1,value2 );
-			usleep(10000);
+			usleep(50000);
 		}
 		#ifdef _LOCK_
 		pthread_muex_unnlock(&lock);
