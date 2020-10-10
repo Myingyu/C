@@ -1,3 +1,9 @@
+/*
+	管道断裂
+	wait回收进程时，状态码为：d（十六进制）
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
