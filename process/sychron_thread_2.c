@@ -12,7 +12,7 @@ void *function(void *arg);
 
 int main(int argc, char const *argv[])
 {
-	pthread a_thread;
+	pthread_t a_thread;
 
 
 	if ( sem_init(&sem_w,0, 1) < 0 )
@@ -25,13 +25,13 @@ int main(int argc, char const *argv[])
 		perror("write: sem_init failed");
 		exit(-1);
 	}
-	if ( ptread_create(&a_thread, NULL , function, NULL) != 0)
+	if ( phtread_create(&a_thread, NULL , function, NULL) != 0)
 	{
 		perror("pthread_create failed!");
 	}
 	do{
-		sem_post(sem_w);
-		sem_wait(sem_r);
+		sem_post(&sem_w);
+		sem_wait(&sem_r);
 		fgets(buf, 32, stdin);
 		sleep(5);
 	}while(strncmp(buf, "quit", 4) != 0);
