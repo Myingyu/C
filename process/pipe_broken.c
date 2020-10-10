@@ -9,7 +9,7 @@
 int main(int argc, char const *argv[])
 {
 	pid_t pid;
-	int pfd[2] , stauts;
+	int pfd[2] , status;
 	char buf[32];
 	if ( pipe(pfd) < 0 )
 	{
@@ -25,8 +25,8 @@ int main(int argc, char const *argv[])
 		exit(0);
 	}else{
 		//父进程
-		wait(&stauts);
-		printf("%x\n", stauts);
+		wait(&status);
+		printf("status%x\n", status);
 	}
 	return 0;
 }
