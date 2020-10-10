@@ -25,7 +25,7 @@ int main(void)
 	}else if (  pid1 == 0 )
 	{
 		//子进程1
-		strcpy(buf,"Im process_1");
+		strcpy(buf, "Im process_1");
 		write(pfd[1], buf, 32);
 		exit(0);
 	}else{
@@ -36,7 +36,7 @@ int main(void)
 		}
 		else if ( pid2 == 0 ){
 			//子进程2
-			sleep(1);
+			sleep(10);
 			strcpy(buf, "Im process_2");
 			write(pfd[1], buf, 32);
 		}else{
