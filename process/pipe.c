@@ -1,5 +1,6 @@
 // 无名管道
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -36,13 +37,13 @@ int main(void)
 			//子进程2
 			sleep(1);
 			strcpy(buf, "Im process_2");
-			write(pdf[1], buf, 32);
+			write(pfd[1], buf, 32);
 		}else{
 			wait( NULL );
 			read(pfd[0], buf, 32);
 			printf("%s\n", buf);
 			wait( NULL );
-			read(pfd[0], buf, 32)
+			read(pfd[0], buf, 32);
 			printf("%s\n", buf);
 		}
 
