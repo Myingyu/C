@@ -15,6 +15,7 @@ void *function(void * arg);
 
 int main(int argc, char const *argv[])
 {
+	count = 0;
 	pthread_t a_thread;
 
 	if ( pthread_mutex_init(&lock, NULL)!= 0 )
