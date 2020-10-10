@@ -52,7 +52,7 @@ void *function(void *arg){
 			sleep(3);
 		}
 		#ifdef _LOCK_
-		pthread_mutex_unnlock(&lock);
+		pthread_mutex_unlock(&lock);
 		#endif
 	}
 	return NULL;
