@@ -54,7 +54,7 @@ void *function(void *arg){
 		#ifdef _LOCK_
 		pthread_mutex_unlock(&lock);
 		#endif
-		sleep(3);
+		sleep(2);
 	}
 	return NULL;
 }
