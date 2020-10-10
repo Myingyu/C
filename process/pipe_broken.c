@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 
 
-int main(int argc, char const *argv[])
+int main(void)
 {
 	pid_t pid;
 	int pfd[2] , status;
