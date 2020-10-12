@@ -23,7 +23,7 @@ int main(void)
 	buf.mtype = 100;
 	fgets(buf.mtext, 64, stdin);
 	//生成key
-	if ( key=ftok(".", 'm') == -1 ){
+	if ( (key=ftok(".", 'm')) == -1 ){
 		perror("ftok");exit(-1);
 	}
 	//创建私有内存
