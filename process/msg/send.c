@@ -17,7 +17,7 @@ int main(void)
 {
 	int msgid;
 	key_t key;
-	int shmid
+	int shmid;
 
 	MSG buf;
 	buf.mtype = 100;
