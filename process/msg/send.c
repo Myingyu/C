@@ -39,7 +39,7 @@ int main(void)
 		perror("msgsnd failed");exit(-1);
 	}
 
-	printf("send message: %s\n", buf);
+	printf("send message: %s\n", buf.mtext);
 
 	return 0;
 }

@@ -39,8 +39,8 @@ int main(int argc, char const *argv[])
 	{
 		perror("msgrcv failed");exit(-1);
 	}
-	
-	printf("received message: %s\n", buf);
+
+	printf("received message: %s\n", buf.mtext);
 
 
 
