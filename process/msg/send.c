@@ -17,6 +17,7 @@ int main(void)
 {
 	int msgid;
 	key_t key;
+	int shmid
 
 	MSG buf;
 	buf.mtype = 100;
@@ -26,7 +27,7 @@ int main(void)
 		perror("ftok");exit(-1);
 	}
 	//创建私有内存
-	if ( int shmid = shmget(key, 1024, IPC_CREAT|06666) < 0 )
+	if ( shmid = shmget(key, 1024, IPC_CREAT|06666) < 0 )
 	{
 		perror("shmget error!");exit(-1);
 	}
@@ -34,7 +35,7 @@ int main(void)
 	if( (msgid = msgget(key, IPC_CREAT|0666) == -1 )){
 		printf("msgget failed!\n");exit(-1);
 	}
-	if ( msgsnd(int msgid, &buf,LEN,0) ==-1 )
+	if ( msgsnd(msgid, &buf,LEN,0) ==-1 )
 	{
 		perror("msgsnd failed");exit(-1);
 	}
