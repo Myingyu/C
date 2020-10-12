@@ -17,6 +17,7 @@ int main(int argc, char const *argv[])
 {
 	int msgid;
 	key_t key;
+	int shmid;
 
 	MSG buf;
 	buf.mtype = 100;
@@ -26,7 +27,7 @@ int main(int argc, char const *argv[])
 		perror("ftok");exit(-1);
 	}
 	//创建私有内存
-	if ( int shmid = shmget(key, 1024, IPC_CREAT|06666) < 0 )
+	if ( shmid = shmget(key, 1024, IPC_CREAT|06666) < 0 )
 	{
 		perror("shmget error!");exit(-1);
 	}
