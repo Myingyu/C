@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
 	{
 		perror("msgget failed");exit(-1);
 	}
-	if ( msgrcv(msgid, &buf, LEN, 0)  == -1 )
+	if ( msgrcv(msgid, &buf, LEN, buf.mtype, 0)  == -1 )
 	{
 		perror("msgrcv failed");exit(-1);
 	}
