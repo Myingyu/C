@@ -36,7 +36,7 @@ int main(void)
 		if ( msgsnd(msgid, &buf,LEN,0) ==-1 ){
 			perror("msgsnd failed");exit(-1);
 		}
-		printf("send message: %s\n", buf.mtext);}
+		printf("send message: %s", buf.mtext);}
 
 	return 0;
 }
