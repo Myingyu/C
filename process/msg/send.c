@@ -26,7 +26,7 @@ int main(void)
 	MSG buf;
 
 	//生成key
-	if ( (key=ftok(".", 'q')) == -1 ){
+	if ( (key=ftok("./", 'q')) == -1 ){
 		perror("ftok");exit(-1);
 	}
 
