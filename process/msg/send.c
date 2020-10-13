@@ -45,7 +45,7 @@ int main(void)
 		//接受消息
 		// buf.mtype = M_TYPEA;
 		msgrcv(msgid, &buf, LEN, M_TYPEA, 0);
-		printf("received message: %s\n", buf.mtext);
+		printf("received message: %s", buf.mtext);
 	}
 	return 0;
 }
