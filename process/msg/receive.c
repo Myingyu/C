@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
 	{
 		perror("msgget failed");exit(-1);
 	}
-	buf.mtype = M_TYPEA;
+
 
 	while(1){	
 		// 接受消息
@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
 		//向send.c 发送消息
 		fgets(buf.mtext, 64, stdin); 
 		printf("send message: %s", buf.mtext);
-
+		buf.mtype = M_TYPEA;
 		msgsnd(msgid, &buf, LEN, 0);
 	}
 
