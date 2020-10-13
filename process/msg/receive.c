@@ -31,13 +31,14 @@ int main(int argc, char const *argv[])
 	{
 		perror("msgget failed");exit(-1);
 	}
-	if ( msgrcv(msgid, &buf, LEN, 200, 0)  == -1 )
-	{
-		perror("msgrcv failed");exit(-1);
+
+	while(1){	
+		if ( msgrcv(msgid, &buf, LEN, 200, 0)  == -1 ){
+				perror("msgrcv failed");exit(-1);
+			}
+	
+		printf("received message: %s\n", buf.mtext);
 	}
-
-	printf("received message: %s\n", buf.mtext);
-
 
 
 
