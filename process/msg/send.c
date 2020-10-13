@@ -38,7 +38,7 @@ int main(void)
 		buf.mtype = 100; // 发送消息
 		fgets(buf.mtext, 64, stdin);
 
-		if ( msgsnd(msgid, &buf,LEN,0) < 0 ){
+		if ( msgsnd(msgid, &buf, LEN, 0) == -1 ){
 			perror("msgsnd failed");exit(-1);
 		}
 		printf("send message: %s", buf.mtext);
