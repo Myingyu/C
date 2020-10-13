@@ -35,7 +35,7 @@ int main(void)
 		printf("msgget failed!\n");exit(-1);
 	}
 	while(1){	
-		buf.mtype =M_TYPEB; // 发送消息
+		buf.mtype = 100; // 发送消息
 		fgets(buf.mtext, 64, stdin);
 
 		if ( msgsnd(msgid, &buf,LEN,0) < 0 ){
