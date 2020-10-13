@@ -37,12 +37,14 @@ int main(int argc, char const *argv[])
 
 	while(1){	
 		buf.mtype = M_TYPEB;
+		// 接受消息
 		if ( msgrcv(msgid, &buf, LEN, M_TYPEB, 0)  == -1 ){
 				perror("msgrcv failed");exit(-1);
 			}
 	
 		printf("received message: %s\n", buf.mtext);
-		buf.mtype = M_TYPEA;
+
+		//向send.c 发送消息
 		fgets(buf.mtext, 64, stdin); 
 		printf("send message: %s\n", buf.mtext);
 		msgsnd(msgid, &buf, LEN, 0);

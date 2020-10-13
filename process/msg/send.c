@@ -34,16 +34,15 @@ int main(void)
 	if( (msgid = msgget(key, IPC_CREAT|0666)) < 0 ){
 		printf("msgget failed!\n");exit(-1);
 	}
-	while(1){	
-		buf.mtype = M_TYPEB; // 发送消息
+	while(1){
+		// 向receive.c 发送消息	
+		buf.mtype = M_TYPEB; 
 		fgets(buf.mtext, 64, stdin);
-
 		if ( msgsnd(msgid, &buf, LEN, 0) == -1 ){
 			perror("msgsnd failed");exit(-1);
 		}
 		printf("send message: %s", buf.mtext);
-		//接受消息
-		// buf.mtype = M_TYPEA;
+		// 接受消息
 		msgrcv(msgid, &buf, LEN, M_TYPEA, 0);
 		printf("received message: %s", buf.mtext);
 	}
