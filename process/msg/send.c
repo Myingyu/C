@@ -35,7 +35,7 @@ int main(void)
 		printf("msgget failed!\n");exit(-1);
 	}
 	while(1){	
-		buf.mtype = 100; // 发送消息
+		buf.mtype = M_TYPEB; // 发送消息
 		fgets(buf.mtext, 64, stdin);
 
 		if ( msgsnd(msgid, &buf, LEN, 0) == -1 ){
@@ -43,7 +43,7 @@ int main(void)
 		}
 		printf("send message: %s", buf.mtext);
 		//接受消息
-		buf.mtype = M_TYPEA;
+		// buf.mtype = M_TYPEA;
 		msgrcv(msgid, &buf, LEN, M_TYPEA, 0);
 		printf("received message: %s\n", buf.mtext);
 	}
