@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
 	}
 
 	while(1){	
-		buf.mtype = M_TYPEB;
+		buf.mtype = M_TYPEA;
 		// 接受消息
 		if ( msgrcv(msgid, &buf, LEN, M_TYPEB, 0)  == -1 ){
 				perror("msgrcv failed");exit(-1);
