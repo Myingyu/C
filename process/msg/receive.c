@@ -43,7 +43,8 @@ int main(int argc, char const *argv[])
 	
 		printf("received message: %s\n", buf.mtext);
 		buf.mtype = M_TYPEA;
-		fgets(buf.mtext, 64, stdin);
+		fgets(buf.mtext, 64, stdin); 
+		printf("send message: %s\n", buf.mtext);
 		msgsnd(msgid, &buf, LEN, 0);
 	}
 

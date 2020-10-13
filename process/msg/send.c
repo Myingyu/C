@@ -31,12 +31,13 @@ int main(void)
 	}
 
 	//消息队列创建
-	if( (msgid = msgget(key, IPC_CREAT|0666) == -1 )){
+	if( (msgid = msgget(key, IPC_CREAT|0666) < 0 )){
 		printf("msgget failed!\n");exit(-1);
 	}
 	while(1){	
 		buf.mtype =M_TYPEB; // 发送消息
 		fgets(buf.mtext, 64, stdin);
+
 		if ( msgsnd(msgid, &buf,LEN,0) < 0 ){
 			perror("msgsnd failed");exit(-1);
 		}
@@ -44,6 +45,7 @@ int main(void)
 		//接受消息
 		buf.mtype = M_TYPEA;
 		msgrcv(msgid, &buf, LEN, M_TYPEA, 0);
+		printf("received message: %s\n", buf.mtext);
 	}
 	return 0;
 }
