@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
 	int shmid;
 
 	MSG buf;
-	buf.mtype =200;
+	buf.mtype =100;
 
 	//生成key
 	if ( (key=ftok(".", 'q')) == -1 ){
