@@ -1,6 +1,8 @@
 /*
 	进程A：循环从键盘输入并写入有名管道myfifo，输入quit时退出
 	进程B：循环你统计进程A每次写入myfifo的字符串的长度
+	先运行create_fifo
+	再运行read_fifo和write_fifo
 */
 
 #include <sys/types.h>

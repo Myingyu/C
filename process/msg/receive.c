@@ -26,12 +26,7 @@ int main(int argc, char const *argv[])
 	if ( (key=ftok(".", 'm')) == -1 ){
 		perror("ftok");exit(-1);
 	}
-	// 创建私有内存
-	if ( (shmid = shmget(key, 1024, IPC_CREAT|0666)) < 0 )
-	{
-		perror("shmget error!");exit(-1);
-	}
-
+	
 	if ( (msgid = msgget(key, IPC_CREAT|0666)) == -1)
 	{
 		perror("msgget failed");exit(-1);

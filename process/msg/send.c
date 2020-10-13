@@ -4,6 +4,7 @@
 #include <sys/msg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 //消息的格式
 typedef struct {
 	long mtype;
@@ -20,16 +21,11 @@ int main(void)
 	int shmid;
 
 	MSG buf;
-	buf.mtype = 100;
+	buf.mtype = 200;
 	fgets(buf.mtext, 64, stdin);
 	//生成key
 	if ( (key=ftok(".", 'm')) == -1 ){
 		perror("ftok");exit(-1);
-	}
-	//创建私有内存
-	if ( (shmid = shmget(key, 1024, IPC_CREAT|0666)) < 0 )
-	{
-		perror("shmget error!");exit(-1);
 	}
 	//消息队列创建
 	if( (msgid = msgget(key, IPC_CREAT|0666) == -1 )){
