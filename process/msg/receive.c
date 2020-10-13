@@ -23,10 +23,10 @@ int main(int argc, char const *argv[])
 	buf.mtype =200;
 
 	//生成key
-	if ( (key=ftok(".", 'm')) == -1 ){
+	if ( (key=ftok(".", 'q')) == -1 ){
 		perror("ftok");exit(-1);
 	}
-	
+
 	if ( (msgid = msgget(key, IPC_CREAT|0666)) == -1)
 	{
 		perror("msgget failed");exit(-1);

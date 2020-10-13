@@ -24,7 +24,7 @@ int main(void)
 	buf.mtype = 200;
 	fgets(buf.mtext, 64, stdin);
 	//生成key
-	if ( (key=ftok(".", 'm')) == -1 ){
+	if ( (key=ftok(".", 'q')) == -1 ){
 		perror("ftok");exit(-1);
 	}
 	//消息队列创建
