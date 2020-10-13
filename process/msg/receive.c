@@ -12,6 +12,9 @@ typedef struct {
 
 #define LEN (sizeof(MSG) - sizeof(long)) //正文消息长度
 
+#define M_TYPEA 100
+#define M_TYPEB 200
+
 
 int main(int argc, char const *argv[])
 {
@@ -20,7 +23,7 @@ int main(int argc, char const *argv[])
 	int shmid;
 
 	MSG buf;
-	buf.mtype =100;
+
 
 	//生成key
 	if ( (key=ftok(".", 'q')) == -1 ){
@@ -33,11 +36,16 @@ int main(int argc, char const *argv[])
 	}
 
 	while(1){	
-		if ( msgrcv(msgid, &buf, LEN, 200, 0)  == -1 ){
+		buf.mtype = M_TYPEB
+		if ( msgrcv(msgid, &buf, LEN, M_TYPEB, 0)  == -1 ){
 				perror("msgrcv failed");exit(-1);
 			}
 	
 		printf("received message: %s\n", buf.mtext);
+		buf.mtype = M_TYPEA;
+		fgets(buf.mtext, 64, stdin);
+		msgsnd(msgid, &buf, LEN, 0);
+		
 	}
 
 
