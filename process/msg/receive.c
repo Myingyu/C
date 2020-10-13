@@ -42,11 +42,11 @@ int main(int argc, char const *argv[])
 				perror("msgrcv failed");exit(-1);
 			}
 	
-		printf("received message: %s\n", buf.mtext);
+		printf("received message: %s", buf.mtext);
 
 		//向send.c 发送消息
 		fgets(buf.mtext, 64, stdin); 
-		printf("send message: %s\n", buf.mtext);
+		printf("send message: %s", buf.mtext);
 		msgsnd(msgid, &buf, LEN, 0);
 	}
 
