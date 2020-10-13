@@ -36,7 +36,6 @@ int main(int argc, char const *argv[])
 	}
 
 	while(1){	
-		buf.mtype = M_TYPEA;
 		// 接受消息
 		if ( msgrcv(msgid, &buf, LEN, M_TYPEB, 0)  == -1 ){
 				perror("msgrcv failed");exit(-1);
@@ -47,6 +46,7 @@ int main(int argc, char const *argv[])
 		//向send.c 发送消息
 		fgets(buf.mtext, 64, stdin); 
 		printf("send message: %s", buf.mtext);
+		buf.mtype = M_TYPEA;
 		msgsnd(msgid, &buf, LEN, 0);
 	}
 
