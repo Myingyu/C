@@ -45,7 +45,6 @@ int main(int argc, char const *argv[])
 		buf.mtype = M_TYPEA;
 		fgets(buf.mtext, 64, stdin);
 		msgsnd(msgid, &buf, LEN, 0);
-		
 	}
 
 
