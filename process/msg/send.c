@@ -31,7 +31,7 @@ int main(void)
 	}
 
 	//消息队列创建
-	if( (msgid = msgget(key, IPC_CREAT|0666) < 0 )){
+	if( (msgid = msgget(key, IPC_CREAT|0666)) < 0 ){
 		printf("msgget failed!\n");exit(-1);
 	}
 	while(1){	
