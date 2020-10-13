@@ -41,10 +41,10 @@ int main(void)
 		if ( msgsnd(msgid, &buf, LEN, 0) == -1 ){
 			perror("msgsnd failed");exit(-1);
 		}
-		printf("send message: %s", buf.mtext);
 		// 接受消息
 		msgrcv(msgid, &buf, LEN, M_TYPEA, 0);
-		printf("received message: %s", buf.mtext);
+		printf("received message: ");
+		printf("%s", buf.mtext);
 	}
 	return 0;
 }
