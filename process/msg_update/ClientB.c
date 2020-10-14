@@ -61,7 +61,6 @@ int main(int argc, char const *argv[])
 		while(1){
 			msgrcv(msgid, &buf, LEN, M_TYPEB, 0);
 			printf("received message: %s", buf.mtext);
-			sleep(1);
 		}
 
 	}
