@@ -49,6 +49,7 @@ int main(int argc, char const *argv[])
 
 		while(1){
 			buf.mtype = M_TYPEA;
+			printf("input> \n");
 			fgets(buf.mtext, 64, stdin);
 			if ( msgsnd(msgid, &buf, LEN, 0) == -1 ){
 				perror("msgsnd failed"); exit(-1);
