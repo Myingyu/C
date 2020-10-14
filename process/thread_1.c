@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 	pthread_join(a_thread, &result);
-	printf("%s\n", result);
+	// printf("%s\n", result);
 	printf("after thread: %s\n", message);
 
 	

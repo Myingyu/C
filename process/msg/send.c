@@ -21,7 +21,7 @@ int main(void)
 {
 	int msgid;
 	key_t key;
-	int shmid;
+
 
 	MSG buf;
 
