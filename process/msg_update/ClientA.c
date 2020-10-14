@@ -54,8 +54,7 @@ int main(int argc, char const *argv[])
 				perror("msgsnd failed"); exit(-1);
 			}
 		}
-
-	}
+	}	
 	if ( pid_receive == 0){
 		MSG buf;
 
@@ -65,6 +64,9 @@ int main(int argc, char const *argv[])
 			sleep(1);
 		}
 
+	}
+	while(1){
+		sleep(1);
 	}
 	return 0;
 }
