@@ -25,8 +25,8 @@ void *receive_function(void *arg);
 
 int main(int argc, char const *argv[])
 {
-	pid_t pid_send
-	pid_t pid_receive
+	pid_t pid_send;
+	pid_t pid_receive;
 	int msgid;
 	key_t key;
 
@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
 		perror("pid_send fork");exit(-1);
 	}
 	if ( (pid_receive = fork()) < 0){
-		perrorO("pid_receive received"); exit(-1);
+		perror("pid_receive received"); exit(-1);
 	}
 	if ( (key=ftok("./", 'q')) == -1){
 		perror("ftok");exit(-1);
