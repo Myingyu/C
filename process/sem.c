@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
     	perror("shmget");exit(-1);
     }
     //创建信号灯集合
-	if ( (semid = semget(key, 3, IPC_CREAT|0666)) < 0 ){
+	if ( (semid = semget(key, 2, IPC_CREAT|0666)) < 0 ){
 		perror("semget");
 		goto _erro1;
 	}
