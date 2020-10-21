@@ -3,6 +3,8 @@
 #include <sys/ipc.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <shm.h>
+
 
 #define N 64
 #define READ 0
@@ -25,22 +27,27 @@ int main(int argc, char const *argv[])
     char *shmaddr;
 
     if ( (key=ftok("./", 'p')) == -1 ){
-    	perror("ftok");exit(-1)
+    	perror("ftok");exit(-1);
     }
     //创建共享内存
     if ( (shmid=shmget(key, N, IPC_CREAT|0666))){
     	perror("shmget");exit(-1);
     }
     //创建信号灯集合
-	if ( (semid = semget(key, 2, IPC_CREAT|0666|IPC_EXCEL)) < 0 ){
+	if ( (semid = semget(key, 2, IPC_CREAT|0666|IPC_EXCL)) < 0 ){
 		perror("semget");
 		goto _erro1;
 	}
-	init_sem(semid, s, 2)
-	if ( (shmaddr = (char*)shmat(shmid, NULL, 0)) == (char*) -1){
+	init_sem(semid, s, 2);
+	if( (shmaddr = (char*)shmat(shmid, NULL, 0)) == (char*) -1){
 		perror("shmat");
 		goto _erro2;
 	}
+	_erro1:
+	shmctl(semid, IPC_RMID, NULL);
+	_erro2:
+	semctl(shmid, 0, IPC_RMID);
+
 	//创建子进程
 	if ( (pid = fork()) < 0){
 		perror("fork");
@@ -79,10 +86,6 @@ int main(int argc, char const *argv[])
 		kill(pid, SIGUSR1);
 
 	}
-_erro1:
-	shmctl(semid, IPC_RMID, NULL);
-_erro2:
-	semctl(shmid, 0, IPC_RMID);
 	return 0;
 }
 
