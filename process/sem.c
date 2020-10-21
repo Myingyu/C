@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
     	perror("ftok");exit(-1);
     }
     //创建共享内存
-    if ( (shmid=shmget(key, N, IPC_CREAT|0666))){
+    if ( (shmid=shmget(key, N, IPC_CREAT|0666)) == -1){
     	perror("shmget");exit(-1);
     }
     //创建信号灯集合
