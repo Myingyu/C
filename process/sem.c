@@ -3,7 +3,7 @@
 #include <sys/ipc.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <shm.h>
+#include <sys/shm.h>
 
 
 #define N 64
