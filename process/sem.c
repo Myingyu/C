@@ -24,7 +24,7 @@ void pv_op(int semid, int num, int op);
 
 int main(int argc, char const *argv[])
 {
-    int semid, shmid, s[]={0,1};
+    int semid, shmid, s[]={0,1，2};
     key_t key; 
     pid_t pid;
     char *shmaddr;
