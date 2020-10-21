@@ -6,6 +6,7 @@
 #include <sys/shm.h>
 #include <string.h>
 #include <signal.h>
+#include <unistd.h>
 
 
 #define N 64
@@ -24,7 +25,7 @@ void pv_op(int semid, int num, int op);
 int main(int argc, char const *argv[])
 {
     int semid, shmid, s[]={0,1};
-    key_t key;
+    key_t key; 
     pid_t pid;
     char *shmaddr;
 
@@ -54,7 +55,7 @@ int main(int argc, char const *argv[])
 		//子进程
 		char *p, *q;
 		while(1){
-			 pv_op(semid, READ, -1);
+			 pv_op(semid, READ, -1); //读P操作
 			 p = q =shmaddr;
 			 while( *q ){
 			 	if ( *q != ' '){
@@ -64,7 +65,7 @@ int main(int argc, char const *argv[])
 			 } 
 			 *p = '\0';
 			 printf("%s", shmaddr);
-			 pv_op(semid, WRITE, 1);
+			 pv_op(semid, WRITE, 1); // 写V操作
 		}
 
 
@@ -73,13 +74,13 @@ int main(int argc, char const *argv[])
 		//父进程
 		while( 1 ){
 			//判断缓冲区是否可写
-			pv_op(semid, WRITE, -1);
+			pv_op(semid, WRITE, -1); // 写P操作
 			printf("input > ");
 			fgets(shmaddr, N, stdin);
 			if(strcmp(shmaddr, "quit\n") == 0){
 				break;
 			}
-			pv_op(semid, READ, 1);
+			pv_op(semid, READ, 1); // 读V操作
 
 		}
 		kill(pid, SIGUSR1);
