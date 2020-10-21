@@ -19,12 +19,12 @@ void pv_op(int semid, int num, int op);
 
 int main(int argc, char const *argv[])
 {
-    int semid, shmid
+    int semid, shmid;
     key_t key;
     pid_t pid;
     char *shmaddr;
 
-    if ( (key=ftok('./', 'p')) == -1 ){
+    if ( (key=ftok("./", 'p')) == -1 ){
     	perror("ftok");exit(-1)
     }
     //创建共享内存
