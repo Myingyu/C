@@ -24,7 +24,7 @@ void pv_op(int semid, int num, int op);
 
 int main(int argc, char const *argv[])
 {
-    int semid, shmid, s[]={0,1,0};
+    int semid, shmid, s[]={0,1};
     key_t key; 
     pid_t pid;
     char *shmaddr;
@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
 		perror("semget");
 		goto _erro1;
 	}
-	init_sem(semid, s, 3);
+	init_sem(semid, s, 2);
 	if( (shmaddr = (char*)shmat(shmid, NULL, 0)) == (char*) -1){
 		perror("shmat");
 		goto _erro2;
