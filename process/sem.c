@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
     pid_t pid;
     char *shmaddr;
 
-    if ( (key=ftok("./", 'p')) == -1 ){
+    if ( (key=ftok(".", 's')) == -1 ){
     	perror("ftok");exit(-1);
     }
     //创建共享内存
@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
     	perror("shmget");exit(-1);
     }
     //创建信号灯集合
-	if ( (semid = semget(key, 2, IPC_CREAT|0666|IPC_EXCL)) < 0 ){
+	if ( (semid = semget(key, 2, IPC_CREAT|0666)) < 0 ){
 		perror("semget");
 		goto _erro1;
 	}
@@ -45,10 +45,7 @@ int main(int argc, char const *argv[])
 		perror("shmat");
 		goto _erro2;
 	}
-	_erro1:
-	shmctl(semid, IPC_RMID, NULL);
-	_erro2:
-	semctl(shmid, 0, IPC_RMID);
+
 
 	//创建子进程
 	if ( (pid = fork()) == -1){
@@ -88,6 +85,10 @@ int main(int argc, char const *argv[])
 		kill(pid, SIGUSR1);
 
 	}
+	_erro1:
+	shmctl(semid, IPC_RMID, NULL);
+	_erro2:
+	semctl(shmid, 0, IPC_RMID);
 	return 0;
 }
 
