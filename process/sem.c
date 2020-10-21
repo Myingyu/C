@@ -103,8 +103,8 @@ void init_sem(int semid, int s[], int n){
 
 void pv_op(int semid, int num, int op){
 	struct sembuf buf;
-	buf.sem_num = 0;
-	buf.sem_op = 0;
+	buf.sem_num = num;
+	buf.sem_op = op;
 	buf.sem_flg = 0;
 	semop(semid, &buf, 1);
 
