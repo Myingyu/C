@@ -51,7 +51,7 @@ int main(int argc, char const *argv[])
 	semctl(shmid, 0, IPC_RMID);
 
 	//创建子进程
-	if ( (pid = fork()) < 0){
+	if ( (pid = fork()) == -1){
 		perror("fork");
 	}else if(pid == 0){
 		//子进程
