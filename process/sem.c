@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
 		//子进程
 		char *p, *q;
 		while(1){
-			 pv(semid, READ, -1);
+			 pv_op(semid, READ, -1);
 			 p = q =shmaddr;
 			 while( *q ){
 			 	if ( *q != ' '){
@@ -67,7 +67,7 @@ int main(int argc, char const *argv[])
 			 } 
 			 *p = '\0';
 			 printf("%s\n", shmaddr);
-			 pv(semid, WRITE, 1);
+			 pv_op(semid, WRITE, 1);
 		}
 
 
@@ -76,13 +76,13 @@ int main(int argc, char const *argv[])
 		//父进程
 		while( 1 ){
 			//判断缓冲区是否可写
-			pv(semid, WRITE, -1);
+			pv_op(semid, WRITE, -1);
 			printf("input > ");
 			fgets(shmaddr, N, stdin);
 			if(strcmp(shmaddr, "quit\n") == 0){
 				break;
 			}
-			pv(semid, READ, 1);
+			pv_op(semid, READ, 1);
 
 		}
 		kill(pid, SIGUSR1);
