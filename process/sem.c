@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
 			 	q++;
 			 } 
 			 *p = '\0';
-			 printf("%s\n", shmaddr);
+			 printf("%s", shmaddr);
 			 pv_op(semid, WRITE, 1);
 		}
 
