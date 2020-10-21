@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/shm.h>
+#include <string.h>
+#include <signal.h>
 
 
 #define N 64
@@ -53,8 +55,8 @@ int main(int argc, char const *argv[])
 		perror("fork");
 	}else if(pid == 0){
 		//子进程
-		char *p, *q
-		while( 1 ){
+		char *p, *q;
+		while(1){
 			 pv(semid, READ, -1);
 			 p = q =shmaddr;
 			 while( *q ){
@@ -76,7 +78,7 @@ int main(int argc, char const *argv[])
 			//判断缓冲区是否可写
 			pv(semid, WRITE, -1);
 			printf("input > ");
-			fgets(shaddr, N, stdin);
+			fgets(shmaddr, N, stdin);
 			if(strcmp(shmaddr, "quit\n") == 0){
 				break;
 			}
