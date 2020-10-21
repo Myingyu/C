@@ -6,7 +6,7 @@
 #include <sys/shm.h>
 #include <string.h>
 #include <signal.h>
-#include <unistd.h>
+#include <unistd.h> // 不加载 pid = fork()有警告
 
 
 #define N 64
