@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
 	// 3. 调用listen() 把 主动套接字变成被动套接字
 	listen(fd, BACKLOG);
 
-	char ipv4_addr_serv[16]
+	char ipv4_addr_serv[16];
 	if ( (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_serv,sizeof(sin))) == 0){
 		perror("inet_ntop");
 	}
@@ -75,7 +75,7 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 	char ipv4_addr_client[16];
-	
+
 	if (inet_ntop(AF_INET, (void*)&cin.sin_addr, ipv4_addr_client,sizeof(cin)) == 0){
 		perror("inet_ntop");
 	}
