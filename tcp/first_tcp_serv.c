@@ -75,7 +75,7 @@ int main(int argc, char const *argv[])
 			perror("read");
 			exit(-1);
 		}
-		if ( buf =="quit"){
+		if ( !strncasecmp(buf, "quit", strlen(buf)) ){
 			break;
 		}
 		printf("Received data: %s", buf);
