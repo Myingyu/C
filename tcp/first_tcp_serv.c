@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
 		  perror("bind");
 		  exit(-1);
 	}
-	// 3. 调用listen() 把主动套接字变成被动套接字
+	// 3. 调用listen() 把 主动套接字变成被动套接字
 	listen(fd, BACKLOG);
 	// 4. 阻塞等待客户端请求连接
 	int newfd = -1;
@@ -66,10 +66,10 @@ int main(int argc, char const *argv[])
 	while(1){
 		bzero(buf, BUFSIZE);
 		do{
-			if((ret = read(newfd, buf, sizeof(buf))) == -1){
+			if((ret = read(newfd, buf, BUFSIZE-1)) == -1){
 				perror("read");
 				exit(-1);
-		}
+			}
 		}while(ret > 0 or EINTR == errno);
 		if ( ret < 0){
 			perror("read");
