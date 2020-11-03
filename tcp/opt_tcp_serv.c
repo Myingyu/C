@@ -58,7 +58,7 @@ int main(int argc, char const *argv[])
 	listen(fd, BACKLOG);
 
 	char ipv4_addr_serv[16]
-	if (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_serv,sizeof(sin)) == 0){
+	if ( (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_serv,sizeof(sin))) == 0){
 		perror("inet_ntop");
 	}
 
@@ -75,6 +75,7 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 	char ipv4_addr_client[16];
+	
 	if (inet_ntop(AF_INET, (void*)&cin.sin_addr, ipv4_addr_client,sizeof(cin)) == 0){
 		perror("inet_ntop");
 	}
