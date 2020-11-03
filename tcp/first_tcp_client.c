@@ -6,7 +6,8 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
-
+#include <arpa/inet.h>
+#include <errno.h>
 
 
 #define SERV_PORT 5001
@@ -52,10 +53,8 @@ int main(int argc, char const *argv[])
 			printf("client is exiting!\n");
 			break;
 		}
-		 write(fd, buf, strlen(buf));
+		write(fd, buf, strlen(buf));
 	}
-
-
 
 
 	return 0;

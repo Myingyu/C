@@ -6,7 +6,8 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
-
+#include <arpa/inet.h>
+#include <errno.h>
 
 
 
@@ -18,7 +19,7 @@
 
 int main(int argc, char const *argv[])
 {
-	int fd = -1p;
+	int fd = -1;
 	struct sockaddr_in sin;
 
 	//创建fd
@@ -43,7 +44,7 @@ int main(int argc, char const *argv[])
 #endif	
 
 	// 2.2 绑定
-	if ( bind(fd, (sockaddr *)&sin,sizeof(sin)) == -1 )
+	if ( bind(fd, (sockaddr *) &sin,sizeof(sin)) == -1 )
 	{
 		  perror("bind");
 		  exit(-1);
