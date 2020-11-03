@@ -56,6 +56,8 @@ int main(int argc, char const *argv[])
 
 	// 3. 调用listen() 把 主动套接字变成被动套接字
 	listen(fd, BACKLOG);
+
+	printf("Host is up from %s:%d connected!\n", sin.sin_addr.s_addr, ntohs(sin.sin_port));
 	// 4. 阻塞等待客户端请求连接
 
 	// 优化2.2 通过程序获取刚建立连接的socket的客户端的IP地址和端口号
@@ -99,7 +101,7 @@ int main(int argc, char const *argv[])
 		if ( !ret ){ //接受到0个字符
  			break;
 		}
-		
+
 		printf("Received data: %s", buf);
 
 
