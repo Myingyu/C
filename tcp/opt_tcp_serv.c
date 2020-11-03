@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
 	int newfd = -1;
 #if 1
 	struct sockaddr_in cin;
-	if(newfd = accept(fd, (struct sockaddr*)&cin, sizeof(cin)) < 0){
+	if((newfd = accept(fd, (struct sockaddr*)&cin, sizeof(cin))) < 0){
 		perror("accept");
 		exit(-1);
 	}
