@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT); // 网络字节序的端口号
 
-	sin.sin_addr.s_addr = htol(INADDY_ANY);
+	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 #if 0
 	sin.sin_addr.s_addr = inet_addr(SER_IP_ADDR);  // 将点分形式的IP地址转换成网络字节序
 #else
@@ -66,11 +66,11 @@ int main(int argc, char const *argv[])
 		perror("accept");
 		exit(-1);
 	}
-	char ipv4[16];
-	if (inet_ntop(AF_INET, (void*)&cin.sin_addr, sizeof(cin)) == 0){
+	char ipv4_addr[16];
+	if (inet_ntop(AF_INET, (void*)&cin.sin_addr, ipv4_addr,sizeof(cin)) == 0){
 		perror("inet_ntop");
 	}
-	printf("Client from %s:%d connected!\n", ipv4, ntohs(cin.sin_port));
+	printf("Client from %s:%d connected!\n", ipv4_addr, ntohs(cin.sin_port));
 
 #else
 	if ( (newfd = accept(fd, NULL, NULL)) < 0){
