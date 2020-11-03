@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 	int fd = -1;
 	struct sockaddr_in sin;
 	// 1. 创建fd
-	if((fd = (AF_INET, SOCK_STREAM, 0) )== -1){
+	if( (fd = socket(AF_INET, SOCK_STREAM, 0) )== -1){
 		perror("socket");
 		exit(-1);
 	}
@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 
-	if ( connect(fd, (struct sockaddr *)&sin, sizeof(sin)) == -1 ){
+	if ( connect(fd, (struct sockaddr *)&sin, sizeof(sin) ) == -1 ){
 		perror("connect");
 		exit(-1);
 	}
