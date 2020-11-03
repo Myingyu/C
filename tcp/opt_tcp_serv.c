@@ -96,13 +96,15 @@ int main(int argc, char const *argv[])
 			perror("read");
 			exit(-1);
 		}
-		printf("Received data: %s", buf);
 		if ( !ret ){ //接受到0个字符
  			break;
 		}
+		
+		printf("Received data: %s", buf);
+
 
 	}
-	printf("client has exited!\n");
+	printf("client has disconnected!\n");
 	
 	close(newfd);
 	close(fd);
