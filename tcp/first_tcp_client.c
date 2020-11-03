@@ -31,8 +31,8 @@ int main(int argc, char const *argv[])
 	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT);
-	if(inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.sin_addr) < 1){
-		perror(inet_pton);
+	if(inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr) < 1){
+		perror("inet_pton");
 		exit(-1);
 	}
 
