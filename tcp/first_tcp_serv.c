@@ -75,10 +75,13 @@ int main(int argc, char const *argv[])
 			perror("read");
 			exit(-1);
 		}
-		if ( !strncasecmp(buf, "quit", 4 )){
+		printf("Received data: %s", buf);
+
+		if ( !strncasecmp(buf, "quit", 4)){
+			printf("client is exiting\n");
 			break;
 		}
-		printf("Received data: %s", buf);
+
 	}
 	printf("client has exited!\n");
 	
