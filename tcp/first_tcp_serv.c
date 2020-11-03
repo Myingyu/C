@@ -45,7 +45,7 @@ int main(int argc, char const *argv[])
 #endif	
 
 	// 2.2 绑定
-	if ( bind(fd, (sockaddr *) &sin,sizeof(sin)) == -1 )
+	if ( bind(fd, (struct sockaddr *) &sin,sizeof(sin)) == -1 )
 	{
 		  perror("bind");
 		  exit(-1);
