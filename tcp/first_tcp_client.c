@@ -49,7 +49,7 @@ int main(int argc, char const *argv[])
 			perror("fgets");
 			exit(-1);
 		}
-		if ( !strncasecmp(buf, "quit", 4 ){
+		if ( !strncasecmp(buf, "quit", 4 )){
 			printf("client is exiting!\n");
 			break;
 		}
