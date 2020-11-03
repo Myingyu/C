@@ -13,7 +13,7 @@
 
 
 #define SERV_PORT 5001
-#define SERV_IP_ADDR "192.168.1.6"
+#define SERV_IP_ADDR "192.168.1.120"
 #define BACKLOG 5
 #define BUFSIZE 64
 
