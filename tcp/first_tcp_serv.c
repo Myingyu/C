@@ -70,7 +70,7 @@ int main(int argc, char const *argv[])
 				perror("read");
 				exit(-1);
 		}
-		}while(ret > 0 && EINTR == errno);
+		}while(ret > 0 or EINTR == errno);
 		if ( ret < 0){
 			perror("read");
 			exit(-1);
