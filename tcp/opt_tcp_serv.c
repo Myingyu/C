@@ -57,7 +57,12 @@ int main(int argc, char const *argv[])
 	// 3. 调用listen() 把 主动套接字变成被动套接字
 	listen(fd, BACKLOG);
 
-	printf("Host is up from %s:%d connected!\n", sin.sin_addr.s_addr, ntohs(sin.sin_port));
+	char ipv4_addr_serv[16]
+	if (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_serv,sizeof(sin)) == 0){
+		perror("inet_ntop");
+	}
+
+	printf("Host %s:%d is build up !\n", ipv4_addr_serv, ntohs(sin.sin_port));
 	// 4. 阻塞等待客户端请求连接
 
 	// 优化2.2 通过程序获取刚建立连接的socket的客户端的IP地址和端口号
@@ -69,11 +74,11 @@ int main(int argc, char const *argv[])
 		perror("accept");
 		exit(-1);
 	}
-	char ipv4_addr[16];
-	if (inet_ntop(AF_INET, (void*)&cin.sin_addr, ipv4_addr,sizeof(cin)) == 0){
+	char ipv4_addr_client[16];
+	if (inet_ntop(AF_INET, (void*)&cin.sin_addr, ipv4_addr_client,sizeof(cin)) == 0){
 		perror("inet_ntop");
 	}
-	printf("Client from %s:%d connected!\n", ipv4_addr, ntohs(cin.sin_port));
+	printf("Client from %s:%d connected!\n", ipv4_addr_client, ntohs(cin.sin_port));
 
 #else
 	if ( (newfd = accept(fd, NULL, NULL)) < 0){
