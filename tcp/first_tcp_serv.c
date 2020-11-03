@@ -70,17 +70,20 @@ int main(int argc, char const *argv[])
 				perror("read");
 				exit(-1);
 			}
-		}while(ret > 0 or EINTR == errno);
+		}while(ret > 0 && EINTR == errno);
 		if ( ret < 0){
 			perror("read");
 			exit(-1);
 		}
 		printf("Received data: %s", buf);
-
-		if ( !strncasecmp(buf, "quit", 4)){
-			printf("client is exiting\n");
-			break;
+		if ( !ret ){ //接受到0个字符
+ 			break;
 		}
+
+		// if ( !strncasecmp(buf, "quit", 4)){
+		// 	printf("client is exiting\n");
+		// 	break;
+		// }
 
 	}
 	printf("client has exited!\n");
