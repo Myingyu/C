@@ -62,9 +62,9 @@ int main(int argc, char const *argv[])
 	// 与newfd进行数据的读写 
 	int ret = -1;
 	char buf[BUFSIZE];
-	//清空缓存区
-	bzero(buf, BUFSIZE);
+
 	while(1){
+		bzero(buf, BUFSIZE);
 		do{
 			if((ret = read(newfd, buf, sizeof(buf))) == -1){
 				perror("read");
@@ -81,6 +81,7 @@ int main(int argc, char const *argv[])
 		printf("Received data: %s", buf);
 	}
 	printf("client has exited!\n");
+	
 	close(newfd);
 	close(fd);
 
