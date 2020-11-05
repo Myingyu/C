@@ -37,7 +37,8 @@ int main(int argc, char const *argv[])
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT); // 网络字节序的端口号
 
-	sin.sin_addr.s_addr = htonl(INADDR_ANY);
+	// sin.sin_addr.s_addr = htonl(INADDR_ANY);
+	sin.sin_addr.s_addr = htonl(SERV_IP_ADDR);
 #if 0
 	sin.sin_addr.s_addr = inet_addr(SER_IP_ADDR);  // 将点分形式的IP地址转换成网络字节序
 #else
@@ -56,6 +57,14 @@ int main(int argc, char const *argv[])
 
 	// 3. 调用listen() 把 主动套接字变成被动套接字
 	listen(fd, BACKLOG);
+	
+	char ipv4_addr_serv[16];
+	if ( (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_serv,sizeof(sin))) == 0){
+		perror("inet_ntop");
+	}
+
+	printf("Host %s:%d is build up !\n", ipv4_addr_serv, ntohs(sin.sin_port));
+
 
 
 	// 4. 阻塞等待客户端请求连接
@@ -75,12 +84,6 @@ int main(int argc, char const *argv[])
 		perror("inet_ntop");
 	}
 
-	char ipv4_addr_serv[16];
-	if ( (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_serv,sizeof(sin))) == 0){
-		perror("inet_ntop");
-	}
-
-	printf("Host %s:%d is build up !\n", ipv4_addr_serv, ntohs(sin.sin_port));
 	printf("Client from %s:%d connected!\n", ipv4_addr_client, ntohs(cin.sin_port));
 
 #else
