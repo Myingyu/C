@@ -18,7 +18,7 @@
 #define BACKLOG 5
 #define BUFSIZE 64
 
-void cli_data_handler(void *arg);
+void *cli_data_handler(void *arg);
 
 int main(int argc, char const *argv[]){
 	int fd = -1;
@@ -110,7 +110,7 @@ int main(int argc, char const *argv[]){
 
 }
 
-void cli_data_handler(void *arg){
+void *cli_data_handler(void *arg){
 	int newfd = *(int *)arg;
 
 	int ret = -1;
