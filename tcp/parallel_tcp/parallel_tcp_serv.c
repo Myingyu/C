@@ -14,7 +14,7 @@
 
 
 #define SERV_PORT 5001
-#define SERV_IP_ADDR "192.168.1.120"
+#define SERV_IP_ADDR "192.168.1.8"
 #define BACKLOG 5
 #define BUFSIZE 64
 
@@ -89,7 +89,7 @@ int main(int argc, char const *argv[])
 void cli_data_hanndler(void * arg){
 	int newfd = *(int *) arg;
 	printf("Client Newfd: %d\n", newfd);
-	
+
 	int ret = -1;
 	char buf[BUFSIZE];
 
