@@ -9,6 +9,7 @@
 #include <netinet/ip.h>
 #include <arpa/inet.h>
 #include <errno.h>
+#include <pthread.h>
 
 
 
@@ -58,14 +59,37 @@ int main(int argc, char const *argv[])
 	listen(fd, BACKLOG);
 	// 4. 阻塞等待客户端请求连接
 	int newfd = -1;
+#if 0 // 单线程
 	if ( (newfd = accept(fd, NULL, NULL)) < 0){
 		perror("accept");
 		exit(-1);
 	}
-	// 优化3： 通过多进程/线程 处理已经家里好连接的客户端数据
-	
+#else
+	// 优化3： 通过多进程/线程 处理已经好连接的客户端数据
+	pthread_t client_thread;
+	pthread_create(client_thread, NULL, cli_data_hanndler, (void *)&newfd);
+
+
+
+
+#endif
 	// 5. 读写
 	// 与newfd进行数据的读写 
+	close(fd);
+
+
+
+
+
+
+
+	return 0;
+}
+
+void cli_data_hanndler(void * arg){
+	int newfd = *(int *) arg;
+	printf("Client Newfd: %d\n", newfd);
+	
 	int ret = -1;
 	char buf[BUFSIZE];
 
@@ -85,20 +109,10 @@ int main(int argc, char const *argv[])
 		if ( !ret ){ //接受到0个字符
  			break;
 		}
-
 	}
 	printf("client has exited!\n");
-	
 	close(newfd);
-	close(fd);
 
-
-
-
-
-
-
-	return 0;
 }
 
 
