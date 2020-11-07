@@ -18,10 +18,9 @@
 #define BACKLOG 5
 #define BUFSIZE 64
 
-void cli_data_handler(void *arg)
+void cli_data_handler(void *arg);
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
 	int fd = -1;
 	struct sockaddr_in sin;
 
@@ -108,6 +107,7 @@ int main(int argc, char const *argv[])
 
 	close(fd);
 	return 0;
+
 }
 
 void cli_data_handler(void *arg){
@@ -141,13 +141,5 @@ void cli_data_handler(void *arg){
 	close(newfd);
 
 }
-
-
-
-
-
-
-
-
 
 
