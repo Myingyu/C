@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
 		}
 		// 聊天显示客户端ip地址
 		char ipv4_addr_client[16];
-		if (inet_ntop(AF_INET, (void*)&cin.sin_addr, ipv4_addr_client,sizeof(cin)) == 0){
+		if (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_client,sizeof(sin)) == 0){
 			perror("inet_ntop");
 		}
 
