@@ -18,6 +18,7 @@
 #define BACKLOG 5
 #define BUFSIZE 64
 
+void cli_data_handler(void *arg)
 
 int main(int argc, char const *argv[])
 {
@@ -38,8 +39,8 @@ int main(int argc, char const *argv[])
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT); // 网络字节序的端口号
 
-	// sin.sin_addr.s_addr = htonl(INADDR_ANY);
-	sin.sin_addr.s_addr = htonl(SERV_IP_ADDR);
+	sin.sin_addr.s_addr = htonl(INADDR_ANY);
+	// sin.sin_addr.s_addr = htonl(SERV_IP_ADDR);
 #if 0
 	sin.sin_addr.s_addr = inet_addr(SER_IP_ADDR);  // 将点分形式的IP地址转换成网络字节序
 #else
