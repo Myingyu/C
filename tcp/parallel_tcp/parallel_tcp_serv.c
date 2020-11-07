@@ -18,6 +18,7 @@
 #define BACKLOG 5
 #define BUFSIZE 64
 
+void cli_data_hanndler(void * arg);
 
 int main(int argc, char const *argv[])
 {
@@ -67,7 +68,7 @@ int main(int argc, char const *argv[])
 #else
 	// 优化3： 通过多进程/线程 处理已经好连接的客户端数据
 	pthread_t client_thread;
-	pthread_create(client_thread, NULL, cli_data_hanndler, (void *)&newfd);
+	pthread_create(&client_thread, NULL, cli_data_hanndler, (void *)&newfd);
 
 
 
