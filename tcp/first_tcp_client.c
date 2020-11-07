@@ -54,13 +54,8 @@ int main(int argc, char const *argv[])
 			printf("client is exiting!\n");
 			break;
 		}
-		// 聊天显示客户端ip地址
-		char ipv4_addr_client[16];
-		if (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_client,sizeof(sin)) == 0){
-			perror("inet_ntop");
-		}
 
-		strcat(buf, ipv4_addr_client);
+
 		write(fd, buf, strlen(buf));
 	}
 
