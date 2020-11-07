@@ -87,8 +87,8 @@ int main(int argc, char const *argv[])
 	printf("Client from %s:%d connected!\n", ipv4_addr_client, ntohs(cin.sin_port));
 
 #else
-	if ( (newfd = accept(fd, NULL, NULL)) < 0){
-		perror("accept");
+	if ( ( = accept(fd, NULL, NULL)) < 0){
+		perrnewfdor("accept");
 		exit(-1);
 	}
 #endif

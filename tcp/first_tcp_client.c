@@ -11,7 +11,7 @@
 
 
 #define SERV_PORT 5001
-#define SERV_IP_ADDR "192.168.1.120"
+#define SERV_IP_ADDR "192.168.1.8"
 #define BACKLOG 5
 #define BUFSIZE 64
 
@@ -45,6 +45,7 @@ int main(int argc, char const *argv[])
 	char buf[BUFSIZE];
 	while(1){
 		bzero(buf, BUFSIZE);
+
 		if ( fgets(buf, BUFSIZE-1, stdin) == NULL){
 			perror("fgets");
 			exit(-1);
@@ -53,6 +54,13 @@ int main(int argc, char const *argv[])
 			printf("client is exiting!\n");
 			break;
 		}
+		// 聊天显示客户端ip地址
+		char ipv4_addr_client[16];
+		if (inet_ntop(AF_INET, (void*)&cin.sin_addr, ipv4_addr_client,sizeof(cin)) == 0){
+			perror("inet_ntop");
+		}
+
+		strcat(buf, ipv4_addr_client);
 		write(fd, buf, strlen(buf));
 	}
 

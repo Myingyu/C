@@ -9,6 +9,7 @@
 #include <netinet/ip.h>
 #include <arpa/inet.h>
 #include <errno.h>
+#include <pthread.h>
 
 
 
@@ -57,6 +58,7 @@ int main(int argc, char const *argv[])
 	// 3. 调用listen() 把 主动套接字变成被动套接字
 	listen(fd, BACKLOG);
 	// 4. 阻塞等待客户端请求连接
+
 	int newfd = -1;
 	if ( (newfd = accept(fd, NULL, NULL)) < 0){
 		perror("accept");
@@ -88,6 +90,8 @@ int main(int argc, char const *argv[])
 	printf("client has exited!\n");
 	
 	close(newfd);
+
+
 	close(fd);
 
 
@@ -98,13 +102,3 @@ int main(int argc, char const *argv[])
 
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
