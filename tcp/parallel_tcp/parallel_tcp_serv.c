@@ -18,7 +18,6 @@
 #define BACKLOG 5
 #define BUFSIZE 64
 
-void cli_data_hanndler(void * arg);
 
 int main(int argc, char const *argv[])
 {
@@ -35,15 +34,18 @@ int main(int argc, char const *argv[])
 	// 2.1 填充 struct sockaddr_in 结构体变量
 	// sin 结构体清零
 	bzero(&sin, sizeof(sin));
-
+	// 优化1 ： 自动识别服务器IP，并且绑定主机IP
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT); // 网络字节序的端口号
+
+	// sin.sin_addr.s_addr = htonl(INADDR_ANY);
+	sin.sin_addr.s_addr = htonl(SERV_IP_ADDR);
 #if 0
 	sin.sin_addr.s_addr = inet_addr(SER_IP_ADDR);  // 将点分形式的IP地址转换成网络字节序
 #else
-	if(inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr) < 1 ){
-		perror("socket failed!");
-	}
+	// if(inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr) < 1 ){
+	// 	perror("socket failed!");
+	// }
 #endif	
 
 	// 2.2 绑定	
@@ -52,47 +54,67 @@ int main(int argc, char const *argv[])
 		  perror("bind");
 		  exit(-1);
 	}
-	// 优化1 ： 自动识别服务器IP，并且绑定主机IP
-	
 
 
 	// 3. 调用listen() 把 主动套接字变成被动套接字
 	listen(fd, BACKLOG);
+	
+	char ipv4_addr_serv[16];
+	if ( (inet_ntop(AF_INET, (void*)&sin.sin_addr, ipv4_addr_serv,sizeof(sin))) == 0){
+		perror("inet_ntop");
+	}
+
+	printf("Host %s:%d is build up !\n", ipv4_addr_serv, ntohs(sin.sin_port));
+
+
+
 	// 4. 阻塞等待客户端请求连接
+
+	// 优化2.2 通过程序获取刚建立连接的socket的客户端的IP地址和端口号
 	int newfd = -1;
-#if 0 // 单线程
-	if ( (newfd = accept(fd, NULL, NULL)) < 0){
-		perror("accept");
+#if 1
+	struct sockaddr_in cin;
+	socklen_t addr_len = sizeof(cin);
+	pthread_t cli_thread;
+
+	while(1){
+
+		if((newfd = accept(fd, (struct sockaddr*)&cin, &addr_len) ) < 0){
+			perror("accept");
+			exit(-1);
+		}
+		char ipv4_addr_client[16];
+
+		if (inet_ntop(AF_INET, (void*)&cin.sin_addr, ipv4_addr_client,sizeof(cin)) == 0){
+			perror("inet_ntop");
+		}
+
+		printf("Client from %s:%d connected!\n", ipv4_addr_client, ntohs(cin.sin_port));
+		pthread_create(&cli_thread, NULL, cli_data_handler, (void*)&newfd);
+
+	}
+
+
+#else
+	if ( ( = accept(fd, NULL, NULL)) < 0){
+		perrnewfdor("accept");
 		exit(-1);
 	}
-#else
-	// 优化3： 通过多进程/线程 处理已经好连接的客户端数据
-	pthread_t client_thread;
-	pthread_create(&client_thread, NULL, cli_data_hanndler, (void *)&newfd);
-
-
-
-
 #endif
 	// 5. 读写
 	// 与newfd进行数据的读写 
+
+
 	close(fd);
-
-
-
-
-
-
-
 	return 0;
 }
 
-void cli_data_hanndler(void * arg){
-	int newfd = *(int *) arg;
-	printf("Client Newfd: %d\n", newfd);
+void cli_data_handler(void *arg){
+	int newfd = *(int *)arg;
 
 	int ret = -1;
 	char buf[BUFSIZE];
+	printf("Client Newfd: %d\n", newfd);
 
 	while(1){
 		bzero(buf, BUFSIZE);
@@ -106,12 +128,15 @@ void cli_data_hanndler(void * arg){
 			perror("read");
 			exit(-1);
 		}
-		printf("Received data: %s", buf);
 		if ( !ret ){ //接受到0个字符
- 			break;
+				break;
 		}
+
+		printf("Received data: %s", buf);
+
 	}
-	printf("client has exited!\n");
+	printf("client has disconnected!\n");
+
 	close(newfd);
 
 }
