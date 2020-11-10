@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
 
 		recvfrom(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)&cin, &cin_addrlen);
 		printf("receiving: %s\n", buf);
-		sendto(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)&sin, &sin_addrlen);
+		sendto(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)&sin, sin_addrlen);
 	}
 
 	return 0;
