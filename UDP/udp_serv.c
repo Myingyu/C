@@ -1,4 +1,4 @@
-#include "udp_serv.h"
+#include "net.h"
 
 int main(int argc, char const *argv[])
 {
@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
 	while(1){
 		recvfrom(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)&cin, sizeof(cin));
 		printf("receiving: %s\n", buf);
-		sendto(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)sin, sizeof(sin));
+		sendto(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)&sin, sizeof(sin));
 	}
 
 	return 0;
