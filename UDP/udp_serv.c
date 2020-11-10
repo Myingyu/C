@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 	if(bind(sockfd , (struct sockaddr*)&sin, sizeof(sin)) != 0){
 		perror("bind");
 		exit(1);
-	ß
+	}
 
 	char buf[BUFSIZE];
 	socklen_t sin_addrlen = sizeof(sin);
