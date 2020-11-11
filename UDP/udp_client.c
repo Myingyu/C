@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
 	}
 	//填充服务端 结构体
 	struct sockaddr_in sin;
-	bzero(sin, sizeof(sin));
+	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htonl(SERV_PORT);
 	//填充客户端 结构体
