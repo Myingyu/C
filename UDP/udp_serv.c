@@ -22,10 +22,10 @@ int main(int argc, char const *argv[])
 		perror("inet_pton failed!");
 		exit(1);
 	}
-	if(inet_pton(AF_INET, CLIENT_IP_ADDR, (void*)&cin.sin_addr.s_addr) != 1){
-		perror("inet_pton failed!");
-		exit(1);
-	}
+	// if(inet_pton(AF_INET, CLIENT_IP_ADDR, (void*)&cin.sin_addr.s_addr) != 1){
+	// 	perror("inet_pton failed!");
+	// 	exit(1);
+	// }
 	if(bind(sockfd , (struct sockaddr*)&sin, sizeof(sin)) != 0){
 		perror("bind");
 		exit(1);
@@ -35,11 +35,14 @@ int main(int argc, char const *argv[])
 	socklen_t sin_addrlen = sizeof(sin);
 	socklen_t cin_addrlen = sizeof(cin);
 	while(1){
-
-		recvfrom(sockfd, buf, BUFSIZE-1, MSG_CMSG_CLOEXEC, (struct sockaddr*)&cin, &cin_addrlen);
+		bzero(buf, BUFSIZE);
+		if(recvfrom(sockfd, buf, BUFSIZE-1, 0, (struct sockaddr*)&cin, &cin_addrlen) < 0){
+			perror("recvfrom!");
+			continue;
+		}
 		printf("receiving: %s\n", buf);
 		sleep(2);
-		sendto(sockfd, buf, BUFSIZE-1, MSG_CMSG_CLOEXEC, (struct sockaddr*)&sin, sin_addrlen);
+		// sendto(sockfd, buf, BUFSIZE-1, MSG_CMSG_CLOEXEC, (struct sockaddr*)&sin, sin_addrlen);
 	}
 
 	return 0;

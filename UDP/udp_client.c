@@ -10,6 +10,7 @@ int main(int argc, char const *argv[])
 	}
 	//填充服务端 结构体
 	struct sockaddr_in sin;
+	bzero(sin, sizeof(sin));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htonl(SERV_PORT);
 	//填充客户端 结构体
@@ -29,9 +30,10 @@ int main(int argc, char const *argv[])
 	char buf[BUFSIZE];
 
 	while(1){
-		sendto(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)&sin, sizeof(sin));
+		bzero(buf,BUFSIZE);
 		fgets(buf, BUFSIZE-1, stdin);
-		recvfrom(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)&cin, sizeof(cin));
+		sendto(sockfd, buf, BUFSIZE-1, 0, (struct sockaddr*)&sin, sizeof(sin));
+		// recvfrom(sockfd, buf, BUFSIZE-1, MSG_DONTWAIT, (struct sockaddr*)&cin, sizeof(cin));
 
 
 	}
