@@ -42,9 +42,9 @@ int main(int argc, char const *argv[])
 			continue;
 		}
 		inet_ntop(AF_INET, (void*)&cin.sin_addr, client_ipv4, cin_addrlen);
-		printf("From %s:%d in receiving: %s\n", client_ipv4, ntohs(cin.sin_port),buf);
+		printf("From %s:%d in receiving: %s\n", client_ipv4, ntohs(cin.sin_port), buf);
 
-		sleep(2);
+		sleep(1);
 		// sendto(sockfd, buf, BUFSIZE-1, MSG_CMSG_CLOEXEC, (struct sockaddr*)&sin, sin_addrlen);
 	}
 

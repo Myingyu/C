@@ -12,22 +12,24 @@ int main(int argc, char const *argv[])
 	struct sockaddr_in sin;
 	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
-	sin.sin_port = htonl(SERV_PORT);
+	sin.sin_port = htons(SERV_PORT);
 	//填充客户端 结构体
 	struct sockaddr_in cin;
 	cin.sin_family = AF_INET;
-	cin.sin_port = htonl(CLIENT_PORT);
+	socklen_t client_addrlen = sizeof(cin);
+
 
 	if(inet_pton(AF_INET, SERV_IP_ADDR, (void*)&sin.sin_addr.s_addr) != 1){
 		perror("inet_pton failed!");
 		exit(1);
 	}
-	if(inet_pton(AF_INET, CLIENT_IP_ADDR, (void*)&cin.sin_addr.s_addr) != 1){
-		perror("inet_pton failed!");
-		exit(1);
-	}
+	// if(inet_pton(AF_INET, CLIENT_IP_ADDR, (void*)&cin.sin_addr.s_addr) != 1){
+	// 	perror("inet_pton failed!");
+	// 	exit(1);
+	// }
 
 	char buf[BUFSIZE];
+
 
 	while(1){
 		bzero(buf,BUFSIZE);
