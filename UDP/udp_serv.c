@@ -15,13 +15,15 @@ int main(int argc, char const *argv[])
 	//填充客户端 结构体
 	struct sockaddr_in cin;
 	cin.sin_family = AF_INET;
-
-
-
+#if 1
+	sin.sin_addr.s_addr = htons(INADDR_ANY);
+#else
 	if(inet_pton(AF_INET, SERV_IP_ADDR, (void*)&sin.sin_addr.s_addr) != 1){
 		perror("inet_pton failed!");
 		exit(1);
 	}
+#endif
+	
 	// if(inet_pton(AF_INET, CLIENT_IP_ADDR, (void*)&cin.sin_addr.s_addr) != 1){
 	// 	perror("inet_pton failed!");
 	// 	exit(1);

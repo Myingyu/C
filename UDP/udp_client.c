@@ -4,6 +4,10 @@ int main(int argc, char const *argv[])
 {
 	int sockfd;
 
+	if ( argc != 2){
+		printf("./client XXX.XXX.XXX.XXX\n");
+		exit(1);
+	}
 	if ( (sockfd = socket(AF_INET,SOCK_DGRAM,0)) == -1){
 		perror("socket");
 		exit(1);
@@ -18,17 +22,12 @@ int main(int argc, char const *argv[])
 	struct sockaddr_in cin;
 	cin.sin_family = AF_INET;
 	socklen_t client_addrlen = sizeof(cin);
-#if 1
-	// 任何IP都可以是服务器
-	sin.sin_addr.s_addr = htons(INADDR_ANY);
-#else
-	//指定IP才可以是服务器
-	
-	if(inet_pton(AF_INET, SERV_IP_ADDR, (void*)&sin.sin_addr.s_addr) != 1){
+
+ 
+	if(inet_pton(AF_INET, argv[1], (void*)&sin.sin_addr.s_addr) != 1){
 		perror("inet_pton failed!");
 		exit(1);
 	}
-#endif
 	// if(inet_pton(AF_INET, CLIENT_IP_ADDR, (void*)&cin.sin_addr.s_addr) != 1){
 	// 	perror("inet_pton failed!");
 	// 	exit(1);
