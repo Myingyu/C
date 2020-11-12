@@ -11,11 +11,11 @@ int main(int argc, char const *argv[])
 	//填充服务端 结构体
 	struct sockaddr_in sin;
 	sin.sin_family = AF_INET;
-	sin.sin_port = htonl(SERV_PORT);
+	sin.sin_port = htons(SERV_PORT);
 	//填充客户端 结构体
 	struct sockaddr_in cin;
 	cin.sin_family = AF_INET;
-	cin.sin_port = htonl(CLIENT_PORT);
+
 
 
 	if(inet_pton(AF_INET, SERV_IP_ADDR, (void*)&sin.sin_addr.s_addr) != 1){
@@ -34,13 +34,16 @@ int main(int argc, char const *argv[])
 	char buf[BUFSIZE];
 	socklen_t sin_addrlen = sizeof(sin);
 	socklen_t cin_addrlen = sizeof(cin);
+	char client_ipv4[16];
 	while(1){
 		bzero(buf, BUFSIZE);
 		if(recvfrom(sockfd, buf, BUFSIZE-1, 0, (struct sockaddr*)&cin, &cin_addrlen) < 0){
 			perror("recvfrom!");
 			continue;
 		}
-		printf("receiving: %s\n", buf);
+		inet_ntop(AF_INET, (void*)&cin.sin_addr, client_ipv4, cin_addrlen);
+		printf("From %d receiving: %s\n", client_ipv4, buf);
+
 		sleep(2);
 		// sendto(sockfd, buf, BUFSIZE-1, MSG_CMSG_CLOEXEC, (struct sockaddr*)&sin, sin_addrlen);
 	}
