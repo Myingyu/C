@@ -13,16 +13,22 @@ int main(int argc, char const *argv[])
 	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT);
+
 	//填充客户端 结构体
 	struct sockaddr_in cin;
 	cin.sin_family = AF_INET;
 	socklen_t client_addrlen = sizeof(cin);
-
-
+#if 1
+	// 任何IP都可以是服务器
+	sin.sin_addr.s_addr = htons(INADDR_ANY);
+#else
+	//指定IP才可以是服务器
+	
 	if(inet_pton(AF_INET, SERV_IP_ADDR, (void*)&sin.sin_addr.s_addr) != 1){
 		perror("inet_pton failed!");
 		exit(1);
 	}
+#endif
 	// if(inet_pton(AF_INET, CLIENT_IP_ADDR, (void*)&cin.sin_addr.s_addr) != 1){
 	// 	perror("inet_pton failed!");
 	// 	exit(1);
