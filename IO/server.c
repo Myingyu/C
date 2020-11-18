@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 	inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr);
 
 	socklen_t addr_len = sizeof(sin);
-	if ( bind(sockfd, (struct sockaddr *)&sin, addr_len)){
+	if ( bind(sockfd, (struct sockaddr *)&sin, addr_len) ==-1){
 		perror("bind");
 		exit(-1);
 	}
