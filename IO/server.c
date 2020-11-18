@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
 	struct sockaddr_in sin;
 	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
-	sin.sin_port = SERV_PORT;
+	sin.sin_port = htons(SERV_PORT);
 	inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr);
 
 	socklen_t addr_len = sizeof(sin);
@@ -20,7 +20,6 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 	listen(sockfd, BACKLOG);
-	char serv_ipv4_addr[16];
 
 
 
@@ -39,6 +38,8 @@ int main(int argc, char const *argv[])
 	struct sockaddr_in cin;
 	bzero(&cin, sizeof(cin));
 	cin.sin_family =AF_INET;
+
+	char serv_ipv4_addr[16];
 
 	inet_ntop(AF_INET, (void *)&sin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
 	printf("Server IP: %s\n", serv_ipv4_addr);
