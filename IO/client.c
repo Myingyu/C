@@ -22,6 +22,7 @@ int main(int argc, char const *argv[])
 		fgets(buf, BUFSIZE-1, stdin);
 		write(sockfd, buf, strlen(buf));
 	}
+	close(sockfd);
 
 
 
