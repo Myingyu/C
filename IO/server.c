@@ -20,10 +20,9 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 	listen(sockfd, BACKLOG);
+	char serv_ipv4_addr[16];
 
-	struct sockaddr_in cin;
-	bzero(&cin, sizeof(cin));
-	cin.sin_family =AF_INET;
+
 
 
 	char client_ipv4_addr[16];
@@ -32,13 +31,26 @@ int main(int argc, char const *argv[])
 	int accept_fd;
 
 
-	while(1){
-		bzero(buf, BUFSIZE-1);
-
-		if ( (accept_fd = accept(sockfd, (struct sockaddr*)&sin, &addr_len)) == -1){
+	if ( (accept_fd = accept(sockfd, (struct sockaddr*)&sin, &addr_len)) == -1){
 			perror("accpet");
 			exit(-1);
 		}
+
+	struct sockaddr_in cin;
+	bzero(&cin, sizeof(cin));
+	cin.sin_family =AF_INET;
+
+	inet_ntop(AF_INET, (void *)&sin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
+	printf("Server IP: %s\n", serv_ipv4_addr);
+
+
+	while(1){
+		bzero(buf, BUFSIZE-1);
+
+		// if ( (accept_fd = accept(sockfd, (struct sockaddr*)&sin, &addr_len)) == -1){
+		// 	perror("accpet");
+		// 	exit(-1);
+		// }
 		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr,addr_len);
 		printf("%s\n", client_ipv4_addr);
 		
