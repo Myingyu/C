@@ -49,7 +49,7 @@ int main(int argc, char const *argv[])
 
 
 	while(1){
-		int ret = -1
+		int ret = -1;
 		bzero(buf, BUFSIZE-1);
 
 
