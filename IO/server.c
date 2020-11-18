@@ -8,6 +8,7 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 	//创建服务器网络结构体
+	char serv_ipv4_addr[16];
 	struct sockaddr_in sin;
 	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
@@ -20,7 +21,11 @@ int main(int argc, char const *argv[])
 		perror("bind");
 		exit(-1);
 	}
+
 	listen(sockfd, BACKLOG);
+	inet_ntop(AF_INET, (void *)&sin.sin_addr.s_addr, serv_ipv4_addr, sizeof(sin));
+	printf("Server %s : %d  is built up!\n", serv_ipv4_addr, ntohs(sin.sin_port));
+
 
 
 
@@ -36,7 +41,7 @@ int main(int argc, char const *argv[])
 	bzero(&cin, sizeof(cin));
 	cin.sin_family =AF_INET;
 
-	char serv_ipv4_addr[16];
+	
 	char client_ipv4_addr[16];
 
 	if ( (accept_fd = accept(sockfd, (struct sockaddr*)&cin, &addr_len)) == -1){
@@ -61,9 +66,8 @@ int main(int argc, char const *argv[])
 			}
 		}while(ret > 0 && EINTR == errno);
 
-		inet_ntop(AF_INET, (void *)&sin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
+
 		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, sizeof(cin));
-		printf("Server IP:%s %d \n", serv_ipv4_addr, ntohs(sin.sin_port));
 		printf("Client IP:%s %d \n", client_ipv4_addr, ntohs(cin.sin_port));
 		// read(accept_fd, buf, BUFSIZE-1);
 		printf("%s", buf);
