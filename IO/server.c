@@ -30,10 +30,7 @@ int main(int argc, char const *argv[])
 	int accept_fd;
 
 
-	if ( (accept_fd = accept(sockfd, (struct sockaddr*)&sin, &addr_len)) == -1){
-			perror("accpet");
-			exit(-1);
-		}
+
 
 	struct sockaddr_in cin;
 	bzero(&cin, sizeof(cin));
@@ -48,12 +45,16 @@ int main(int argc, char const *argv[])
 	while(1){
 		bzero(buf, BUFSIZE-1);
 
-		// if ( (accept_fd = accept(sockfd, (struct sockaddr*)&sin, &addr_len)) == -1){
-		// 	perror("accpet");
-		// 	exit(-1);
-		// }
-		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr,addr_len);
-		printf("%s\n", client_ipv4_addr);
+		if ( (accept_fd = accept(sockfd, (struct sockaddr*)&sin, &addr_len)) == -1){
+				perror("accpet");
+				exit(-1);
+			}
+
+
+		
+		inet_ntop(AF_INET, (void *)&sin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
+		printf("Server IP: %s\n", serv_ipv4_addr);
+		printf("Client IP: %s\n", client_ipv4_addr);
 		
 		read(accept_fd, buf, BUFSIZE-1);
 		printf("%s", buf);
