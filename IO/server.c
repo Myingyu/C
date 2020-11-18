@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 	exit(-1);
 }
 
-	inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
+	inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
 	printf("Server IP: %s\n", serv_ipv4_addr);
 
 
@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
 		}while(ret > 0 && EINTR == errno);
 
 		inet_ntop(AF_INET, (void *)&sin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
-		// inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, sizeof(cin));
+		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, sizeof(cin));
 		printf("Server IP:%s %d \n", serv_ipv4_addr, ntohs(sin.sin_port));
 		printf("Client IP:%s %d \n", client_ipv4_addr, ntohs(cin.sin_port));
 		// read(accept_fd, buf, BUFSIZE-1);
