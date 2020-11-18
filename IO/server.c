@@ -51,8 +51,8 @@ int main(int argc, char const *argv[])
 			}
 
 		inet_ntop(AF_INET, (void *)&sin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
-		printf("Server IP:%d %s\n", serv_ipv4_addr, ntohs(sin.sin_port));
-		printf("Client IP:%d %s\n", client_ipv4_addr, ntohs(cin.sin_port));
+		printf("Server IP:%s %d \n", serv_ipv4_addr, ntohs(sin.sin_port));
+		printf("Client IP:%s %d \n", client_ipv4_addr, ntohs(cin.sin_port));
 		read(accept_fd, buf, BUFSIZE-1);
 		printf("%s", buf);
 		close(accept_fd);
