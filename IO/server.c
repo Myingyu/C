@@ -59,7 +59,7 @@ int main(int argc, char const *argv[])
 	}
 
 
-	close(fd);
+	close(sockfd);
 	
 
 
