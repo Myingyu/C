@@ -17,6 +17,7 @@ int main(int argc, char const *argv[])
 
 	connect(sockfd, (struct sockaddr *)&sin, addrlen);
 	char buf[BUFSIZE];
+
 	while(1){
 		bzero(&buf, BUFSIZE-1);
 		fgets(buf, BUFSIZE-1, stdin);

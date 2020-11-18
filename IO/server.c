@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 	inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr);
 
 	socklen_t addr_len = sizeof(sin);
-	if ( bind(sockfd, (struct sockaddr *)&sin, addr_len) ==-1){
+	if ( bind(sockfd, (struct sockaddr *)&sin, sizeof(sin)) ==-1){
 		perror("bind");
 		exit(-1);
 	}
@@ -38,14 +38,14 @@ int main(int argc, char const *argv[])
 	char serv_ipv4_addr[16];
 	char client_ipv4_addr[16];
 
-	inet_ntop(AF_INET, (void *)&sin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
+	inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, serv_ipv4_addr, addr_len);
 	printf("Server IP: %s\n", serv_ipv4_addr);
 
 
 	while(1){
 		bzero(buf, BUFSIZE-1);
 
-		if ( (accept_fd = accept(sockfd, (struct sockaddr*)&sin, &addr_len)) == -1){
+		if ( (accept_fd = accept(sockfd, (struct sockaddr*)&cin, &addr_len)) == -1){
 				perror("accpet");
 				exit(-1);
 			}
