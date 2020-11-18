@@ -39,7 +39,7 @@ int main(int argc, char const *argv[])
 			perror("accpet");
 			exit(-1);
 		}
-		inet_ntop(AF_INET, &client_ipv4_addr, cin.sin_addr.s_addr,addr_len);
+		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr,addr_len);
 		printf("%s\n", client_ipv4_addr);
 		
 		read(accept_fd, buf, BUFSIZE-1);
