@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <sys/errno.h>
 
 #define SERV_IP_ADDR "81.70.145.175"
 #define SERV_PORT 50002

@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
 
 
 		do{
-			if((ret = read(newfd, buf, BUFSIZE-1)) == -1){
+			if((ret = read(accept_fd, buf, BUFSIZE-1)) == -1){
 				perror("read");
 				exit(-1);
 			}
