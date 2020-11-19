@@ -15,7 +15,14 @@ int main(int argc, char const *argv[])
 	inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr);
 	socklen_t addrlen = sizeof(sin);
 
-	connect(sockfd, (struct sockaddr *)&sin, addrlen);
+	if(connect(sockfd, (struct sockaddr *)&sin, addrlen) == -1){
+		perror("connect");
+		exit(-1);
+	}
+	char servipaddr[16];
+	inet_ntop(AF_INET, (void *)sin.sin_addr.s_addr, &servipaddr);
+	printf("connect with server %s:%d\n", servipaddr, ntohs(sin.sin_port));
+	
 	char buf[BUFSIZE];
 
 	while(1){
