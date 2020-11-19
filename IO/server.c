@@ -1,5 +1,7 @@
 #include "net.h"
 
+
+void *dataTransfer(void* arg_fd);
 int main(int argc, char const *argv[])
 {
 	int sockfd;
@@ -27,11 +29,6 @@ int main(int argc, char const *argv[])
 	printf("Server %s : %d  is built up!\n", serv_ipv4_addr, ntohs(sin.sin_port));
 
 
-
-
-
-
-	char buf[BUFSIZE];
 	int accept_fd;
 
 
@@ -55,10 +52,37 @@ int main(int argc, char const *argv[])
 
 
 	while(1){
+
+		if ( (accept_fd = accept(sockfd, (struct sockaddr*)&cin, &addr_len)) == -1){
+		perror("accpet");
+		exit(-1);
+		}
+
+		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
+		printf("New Client is connected %s:%d \n", client_ipv4_addr, ntohs(cin.sin_port));
+
+		pthread_t sock_thread;
+		pthread_create(&sock_thread, NULL, dataTransfer, (void *)&accept_fd);
+
+		// read(accept_fd, buf, BUFSIZE-1);
+
+
+	}
+
+
+	close(sockfd);
+	
+
+	return 0;
+}
+
+void *dataTransfer(void* arg_fd){
+	int accept_fd = *(int *)arg_fd;
 		int ret = -1;
+		char buf[BUFSIZE];
+
 		bzero(buf, BUFSIZE-1);
-
-
+	while(1){
 		do{
 			if((ret = read(accept_fd, buf, BUFSIZE-1)) == -1){
 				perror("read");
@@ -66,22 +90,12 @@ int main(int argc, char const *argv[])
 			}
 		}while(ret > 0 && EINTR == errno);
 
-
-		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, sizeof(cin));
-		printf("Client IP:%s %d \n", client_ipv4_addr, ntohs(cin.sin_port));
-		// read(accept_fd, buf, BUFSIZE-1);
-		printf("%s", buf);
+	printf("%s", buf);
 
 	}
 
 	close(accept_fd);
-	close(sockfd);
-	
 
-
-
-
-
-
-	return 0;
 }
+
+
