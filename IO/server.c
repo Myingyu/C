@@ -81,16 +81,18 @@ void *dataTransfer(void* arg_fd){
 		int ret = -1;
 		char buf[BUFSIZE];
 
-		bzero(buf, BUFSIZE-1);
 	while(1){
+		bzero(buf, BUFSIZE-1);
 		do{
 			if((ret = read(accept_fd, buf, BUFSIZE-1)) == -1){
 				perror("read");
 				exit(-1);
 			}
+			printf("%s", buf);
+			
 		}while(ret > 0 && EINTR == errno);
 
-	printf("%s", buf);
+		
 
 	}
 
