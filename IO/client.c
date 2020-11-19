@@ -20,9 +20,9 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 	char servipaddr[16];
-	inet_ntop(AF_INET, (void *)sin.sin_addr.s_addr, &servipaddr);
+	inet_ntop(AF_INET, (void *)&sin.sin_addr, servipaddr, sizeof(sin));
 	printf("connect with server %s:%d\n", servipaddr, ntohs(sin.sin_port));
-	
+
 	char buf[BUFSIZE];
 
 	while(1){
