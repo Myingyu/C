@@ -40,26 +40,17 @@ int main(int argc, char const *argv[])
 
 	
 	char client_ipv4_addr[16];
-
-	if ( (accept_fd = accept(sockfd, (struct sockaddr*)&cin, &addr_len)) == -1){
-	perror("accpet");
-	exit(-1);
-}
-
-	inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
-	printf("Server IP: %s\n", serv_ipv4_addr);
-
-
-
 	while(1){
+		bzero(client_ipv4_addr, sizeof(client_ipv4_addr));
 
 		if ( (accept_fd = accept(sockfd, (struct sockaddr*)&cin, &addr_len)) == -1){
 			perror("accpet");
 			exit(-1);
 		}
 
+
 		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
-		printf("New Client is connected %s:%d \n", client_ipv4_addr, ntohs(cin.sin_port));
+		printf("ACCEPT  New Client is connected %s:%d \n", client_ipv4_addr, ntohs(cin.sin_port));
 
 		pthread_t sock_thread;
 		pthread_create(&sock_thread, NULL, dataTransfer, (void *)&accept_fd);
