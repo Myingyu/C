@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 	//创建服务器网络结构体
 	char serv_ipv4_addr[16];
 	struct sockaddr_in sin;
-	bzero(&sin, sizeof(sin));
+	bzero(&sin, sizeof(sin));exit
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT);
 	sin.sin_addr.s_addr = INADDR_ANY;
@@ -54,8 +54,8 @@ int main(int argc, char const *argv[])
 	while(1){
 
 		if ( (accept_fd = accept(sockfd, (struct sockaddr*)&cin, &addr_len)) == -1){
-		perror("accpet");
-		exit(-1);
+			perror("accpet");
+			exit(-1);
 		}
 
 		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
@@ -78,8 +78,8 @@ int main(int argc, char const *argv[])
 
 void *dataTransfer(void* arg_fd){
 	int accept_fd = *(int *)arg_fd;
-		int ret = -1;
-		char buf[BUFSIZE];
+	int ret = -1;
+	char buf[BUFSIZE];
 
 	while(1){
 		bzero(buf, BUFSIZE-1);
@@ -89,7 +89,7 @@ void *dataTransfer(void* arg_fd){
 				exit(-1);
 			}
 			printf("%s", buf);
-			
+
 		}while(ret > 0 && EINTR == errno);
 
 		
