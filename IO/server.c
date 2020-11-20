@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 	//创建服务器网络结构体
 	char serv_ipv4_addr[16];
 	struct sockaddr_in sin;
-	bzero(&sin, sizeof(sin));exit
+	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT);
 	sin.sin_addr.s_addr = INADDR_ANY;
