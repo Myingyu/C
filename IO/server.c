@@ -80,7 +80,7 @@ void *dataTransfer(void* arg_fd){
 				exit(-1);
 			}
 			if(strlen(buf) == 0){
-				break;
+				goto disconnect;
 			}
 
 			printf("From ACFD %d: %s", accept_fd,buf);
@@ -88,6 +88,8 @@ void *dataTransfer(void* arg_fd){
 		}while(ret > 0 && EINTR == errno);
 
 	}
+
+disconnect:
 	printf("ACFD: %d disconnect\n", accept_fd);
 	close(accept_fd);
 
