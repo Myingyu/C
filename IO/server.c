@@ -83,8 +83,9 @@ void *dataTransfer(void* arg_fd){
 
 		}while(ret > 0 && EINTR == errno);
 
-		
-
+		if(NULL = buf){
+			break;
+		}
 	}
 
 	close(accept_fd);
