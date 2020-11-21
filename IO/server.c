@@ -79,13 +79,14 @@ void *dataTransfer(void* arg_fd){
 				perror("read");
 				exit(-1);
 			}
+			if(strlen(buf) == 0){
+				break;
+			}
+
 			printf("From ACFD %d: %s", accept_fd,buf);
 
 		}while(ret > 0 && EINTR == errno);
 
-		if(strlen(buf) == 0){
-			break;
-		}
 	}
 	printf("ACFD: %d disconnect\n", accept_fd);
 	close(accept_fd);
