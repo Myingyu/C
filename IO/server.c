@@ -79,7 +79,7 @@ void *dataTransfer(void* arg_fd){
 				perror("read");
 				exit(-1);
 			}
-			printf("%s", buf);
+			printf("From ACFD %d: %s", accept_fd,buf);
 
 		}while(ret > 0 && EINTR == errno);
 
