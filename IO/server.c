@@ -87,7 +87,7 @@ void *dataTransfer(void* arg_fd){
 			break;
 		}
 	}
-
+	printf("ACFD: %d disconnect\n", accept_fd);
 	close(accept_fd);
 
 	return 0;
