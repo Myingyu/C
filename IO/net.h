@@ -8,6 +8,7 @@
 #include <sys/errno.h>
 #include <netinet/in.h>
 #include <pthread.h>
+#include <sys/select.h>
 
 
 #define SERV_IP_ADDR "81.70.145.175"
