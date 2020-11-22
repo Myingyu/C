@@ -60,7 +60,7 @@ int main(int argc, char const *argv[])
 				perror("read");
 				exit(-1);
 			}
-			if (ret ==0){
+			if (ret == 0){
 				printf("服务器断开连接！\n");
 				break;
 			}
