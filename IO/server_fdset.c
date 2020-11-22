@@ -93,6 +93,7 @@ void *dataTransfer(void* arg_fd){
 		bzero(buf,BUFSIZE-1);
 
 		do{
+			read(0, buf, BUFSIZE-1);
 			if((ret = write(accept_fd, buf, BUFSIZE-1)) == -1){
 				perror("read");
 				exit(-1);
