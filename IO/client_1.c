@@ -81,7 +81,7 @@ int main(int argc, char const *argv[])
 				exit(-1);
 			}
 			
-			printf("From Server %s:%d, %s \n",servipaddr, SERV_PORT, buf);
+			printf("From Server %s:%d, %s",servipaddr, SERV_PORT, buf);
 
 
 		}
