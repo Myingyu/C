@@ -18,4 +18,4 @@
 // #define CLIENT_IP_ADDR "192.168.1.6"
 // #define CLIENT_PORT 50010
 
-#define BUFSIZE 64
+#define BUFSIZE 128
