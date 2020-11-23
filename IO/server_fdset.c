@@ -42,25 +42,27 @@ int main(int argc, char const *argv[])
 	char client_ipv4_addr[16];
 
 	pid_t readproc;
-	readproc = fork();
-	if ( readproc < 0)
-	{
-		perror("read fork");
-		exit(-1);
-	}else if ( readproc = 0)
-	{
-		//子进程客户端
-		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
-		printf("ACCEPT  New Client is connected %s:%d \n", client_ipv4_addr, ntohs(cin.sin_port));
-		dataTransfer(&accept_fd);
-		return 0;
-	}
+
 	while(1){
 		bzero(client_ipv4_addr, sizeof(client_ipv4_addr));
 
 		if ( (accept_fd = accept(sockfd, (struct sockaddr*)&cin, &addr_len)) == -1){
 			perror("accpet");
 			exit(-1);
+		}
+
+		readproc = fork();
+		if ( readproc < 0)
+		{
+			perror("read fork");
+			exit(-1);
+		}else if ( readproc = 0)
+		{
+			//子进程客户端
+			inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
+			printf("ACCEPT  New Client is connected %s:%d \n", client_ipv4_addr, ntohs(cin.sin_port));
+			dataTransfer(&accept_fd);
+			return 0;
 		}
 
 

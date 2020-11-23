@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
 		FD_SET(sockfd, &rset);
 		maxfd = sockfd;
 		select(maxfd+1, &rset, NULL, NULL, &tout);
-		if (FD_ISSET(0, &rset)) // 判断键盘上是否有标准输入{
+		if (FD_ISSET(0, &rset)){ // 判断键盘上是否有标准输入
 			//读区键盘输入，发送到网络套接字fd
 			//...FIXME!
 			bzero(buf, BUFSIZE);
@@ -68,6 +68,7 @@ int main(int argc, char const *argv[])
 				perror("write to sockfd");
 				exit(-1);
 			}
+		}
 		if (FD_ISSET(sockfd, &rset)){ //判断服务器是否有数据发送过来
 			bzero(buf, BUFSIZE-1);
 			do{
