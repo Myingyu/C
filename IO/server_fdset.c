@@ -40,6 +40,21 @@ int main(int argc, char const *argv[])
 
 	
 	char client_ipv4_addr[16];
+
+	pid_t readproc;
+	readproc = fork();
+	if ( readproc < 0)
+	{
+		perror("read fork");
+		exit(-1);
+	}else if ( readproc = 0)
+	{
+		//子进程客户端
+		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
+		printf("ACCEPT  New Client is connected %s:%d \n", client_ipv4_addr, ntohs(cin.sin_port));
+		dataTransfer(&accept_fd);
+		return 0;
+	}
 	while(1){
 		bzero(client_ipv4_addr, sizeof(client_ipv4_addr));
 
@@ -48,14 +63,6 @@ int main(int argc, char const *argv[])
 			exit(-1);
 		}
 
-
-		inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
-		printf("ACCEPT  New Client is connected %s:%d \n", client_ipv4_addr, ntohs(cin.sin_port));
-
-		pthread_t sock_thread;
-		pthread_create(&sock_thread, NULL, dataTransfer, (void *)&accept_fd);
-
-		// read(accept_fd, buf, BUFSIZE-1);
 
 
 	}
@@ -71,6 +78,7 @@ void *dataTransfer(void* arg_fd){
 	int accept_fd = *(int *)arg_fd;
 	int ret = -1;
 	char buf[BUFSIZE];
+	char res_buf[BUFSIZE+10];
 
 	while(1){
 
@@ -90,12 +98,13 @@ void *dataTransfer(void* arg_fd){
 		}while(ret > 0 && EINTR == errno);
 
 		//写入客户端
-		bzero(buf,BUFSIZE);
-
+		bzero(res_buf,BUFSIZE+10);
+		strncpy(res_buf, SERV_RESP_STR, strlen(SERV_RESP_STR));
+		strcat(res_buf, buf);
 		do{
-			read(0, buf, BUFSIZE-1);
-			if((ret = write(accept_fd, buf, BUFSIZE-1)) == -1){
-				perror("read");
+			read(stdin, buf, BUFSIZE-1);
+			if((ret = write(accept_fd, res_buf, BUFSIZE-1)) == -1){
+				perror("read"); 
 				exit(-1);
 			}
 			if( ret == 0){
