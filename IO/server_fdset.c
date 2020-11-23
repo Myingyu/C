@@ -75,7 +75,7 @@ void *dataTransfer(void* arg_fd){
 	while(1){
 
 		//读客户端
-		bzero(buf, BUFSIZE-1);
+		bzero(buf, BUFSIZE);
 		do{
 			if((ret = read(accept_fd, buf, BUFSIZE-1)) == -1){
 				perror("read");
@@ -90,7 +90,7 @@ void *dataTransfer(void* arg_fd){
 		}while(ret > 0 && EINTR == errno);
 
 		//写入客户端
-		bzero(buf,BUFSIZE-1);
+		bzero(buf,BUFSIZE);
 
 		do{
 			read(0, buf, BUFSIZE-1);
