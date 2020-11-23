@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
 		{
 			perror("read fork");
 			exit(-1);
-		}else if ( readproc = 0)
+		}else if ( readproc == 0)
 		{
 			//子进程客户端
 			inet_ntop(AF_INET, (void *)&cin.sin_addr.s_addr, client_ipv4_addr, addr_len);
@@ -104,7 +104,7 @@ void *dataTransfer(void* arg_fd){
 		strncpy(res_buf, SERV_RESP_STR, strlen(SERV_RESP_STR));
 		strcat(res_buf, buf);
 		do{
-			read(stdin, buf, BUFSIZE-1);
+			// read(stdin, buf, BUFSIZE-1);
 			if((ret = write(accept_fd, res_buf, BUFSIZE-1)) == -1){
 				perror("read"); 
 				exit(-1);

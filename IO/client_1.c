@@ -60,11 +60,7 @@ int main(int argc, char const *argv[])
 				perror("read");
 				exit(-1);
 			}
-			if (ret == 0){
-				printf("服务器断开连接！\n");
-				break;
-			}
-			if ( write(sockfd, buf, BUFSIZE-1) < 0){
+	 			if ( write(sockfd, buf, BUFSIZE-1) < 0){
 				perror("write to sockfd");
 				exit(-1);
 			}
@@ -78,7 +74,7 @@ int main(int argc, char const *argv[])
 			if (ret == 0){
 				printf("服务器断开连接！\n");
 				break;
-			}
+		 	}
 
 			if ( ret < 0){
 				perror("read from socket");
