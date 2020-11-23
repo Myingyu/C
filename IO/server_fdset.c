@@ -99,7 +99,7 @@ void *dataTransfer(void* arg_fd){
 				exit(-1);
 			}
 			if( ret == 0){
-				goto disconnect;
+				goto  disconnect;
 			}
 
 			// printf("From ACFD %d: %s", accept_fd,buf);
