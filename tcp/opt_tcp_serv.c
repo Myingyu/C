@@ -76,7 +76,7 @@ int main(int argc, char const *argv[])
 	socklen_t addr_len = sizeof(cin);
 	if((newfd = accept(fd, (struct sockaddr*)&cin, &addr_len) ) < 0){
 		perror("accept");
-		exit(-1);
+		exqit(-1);
 	}
 	char ipv4_addr_client[16];
 
