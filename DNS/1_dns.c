@@ -13,15 +13,15 @@ int main(int argc, char const *argv[])
 		herror("gethostbyname");
 		exit(-1);
 	}
-	printf("hs->h_addr: %s\n", hs->addr);
+	printf("hs->h_addr: %s\n", hs->h_addr);
 
 	int sockfd = socket(AF_INET,  SOCK_STREAM, 0);
 
 	struct sockaddr_in sin;
-	bzero(sin, sizeof(sin));
+	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT);
-	sin.sin_addr = *(uint32_t *)hs->h_addr;
+	sin.sin_addr.s_addr = *(uint32_t *)hs->h_addr;
 
 	endhostent();
 	hs = NULL;
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 	char buf[BUFSIZE];
 	while(1){
 		bzero(buf,BUFSIZE);
-		read(stdin, buf, BUFSIZE-1);
+		fgets(buf, BUFSIZE-1, stdin);
 		write(sockfd, buf, BUFSIZE-1);
 
 
