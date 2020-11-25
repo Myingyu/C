@@ -16,6 +16,8 @@
 #define BACKLOG 5
 #define SERV_RESP_STR "Server: "
 #define CLIENT_IP_ADDR "192.168.1.17"
+#define CLIENT_IP_1 "192.168.1.249"
+
 // #define CLIENT_PORT 50010
 
 #define BUFSIZE 128

@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT);
-	sin.sin_addr.s_addr = INADDR_ANY;
+	sin.sin_addr.s_addr = SERV_IP_ADDR;
 	// inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr);
 	int b_reuse = 1;
 	//允许发送广播数据包
