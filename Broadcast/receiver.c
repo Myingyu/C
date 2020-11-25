@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 	bzero(&sin, sizeof(sin));
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERV_PORT);
-	inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr);
+	inet_pton(AF_INET, CLIENT_IP_ADDR, &sin.sin_addr.s_addr);
 	socklen_t addrlen = sizeof(sin);
 
 	if(connect(sockfd, (struct sockaddr *)&sin, addrlen) == -1){

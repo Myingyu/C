@@ -17,6 +17,9 @@ int main(int argc, char const *argv[])
 	sin.sin_port = htons(SERV_PORT);
 	sin.sin_addr.s_addr = INADDR_ANY;
 	// inet_pton(AF_INET, SERV_IP_ADDR, &sin.sin_addr.s_addr);
+	int b_reuse = 1;
+	//允许发送广播数据包
+	setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, &b_reuse, sizeof(b_reuse));
 
 	socklen_t addr_len = sizeof(sin);
 	if ( bind(sockfd, (struct sockaddr *)&sin, sizeof(sin)) ==-1){
@@ -36,7 +39,7 @@ int main(int argc, char const *argv[])
 
 	struct sockaddr_in cin;
 	bzero(&cin, sizeof(cin));
-	cin.sin_family =AF_INET;
+  	cin.sin_family =AF_INET;
 
 	
 	char client_ipv4_addr[16];
